@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-02-2017 a las 23:20:08
+-- Tiempo de generación: 23-02-2017 a las 21:57:51
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -20,6 +20,32 @@ SET time_zone = "+00:00";
 -- Base de datos: `policlinico`
 --
 
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminar_cita` (IN `_codcita` INT(10))  BEGIN
+	DELETE from cita WHERE codcita=_codcita;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminar_todo_cita` ()  BEGIN
+    DELETE from cita;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `modificar_cita` (IN `_codcita` VARCHAR(10), IN `_refEsp` VARCHAR(20), IN `_refturno` VARCHAR(15), IN `_refDoc` VARCHAR(25))  BEGIN
+	UPDATE cita set refEsp=_refEsp, refturno=_refturno, refDoc=_refDoc WHERE codcita=_codcita;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `mostrar_citas` ()  BEGIN
+	SELECT *FROM cita;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `nueva_cita` (IN `_codcita` INT(10), IN `_refEsp` VARCHAR(20), IN `_refcodpac` INT(10), IN `_refturno` VARCHAR(15), IN `_refDoc` VARCHAR(25))  BEGIN
+	INSERT INTO cita VALUES('_codcita','_refEsp','_refcodpac','_refturno','_refDoc'); 
+END$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -27,11 +53,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cita` (
-  `codcita` varchar(10) NOT NULL,
+  `codcita` int(10) NOT NULL,
   `refEsp` varchar(20) NOT NULL,
   `refcodpac` int(10) NOT NULL,
   `refturno` varchar(15) NOT NULL,
-  `refhorario` time NOT NULL
+  `refDoc` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -52,21 +78,46 @@ CREATE TABLE `doctor` (
 --
 
 INSERT INTO `doctor` (`codigodoc`, `nombredoc`, `turnodoc`, `especialidadoc`) VALUES
-(1, 'Dr. Maya', 'mañana', 'g'),
-(2, 'Dr Trujillo', 'mCirugia', 'k'),
-(3, 'Dr Loo', 'm2Cardio', 'a'),
-(4, 'Dra Paredes', 'tCirugia', 'k'),
-(5, 'Dr Curbelo', 'mPsiquiatria', 's'),
-(6, 'Dr Quiroga', 'tTrauma', 't'),
-(7, 'Dr Bendezu', 't2Trauma', 't'),
-(8, 'Dr Garibay', 'tGineco', 'e'),
-(9, 'Dr Obregon', 't2Gineco', 'e'),
-(10, 'Dr Ruiz', 'tHemato', 'f'),
-(11, 'Dr Astocondor', 'mMedGener', 'g'),
-(12, 'Dr Oyola', 'mEndocrino', 'c'),
-(13, 'Dr Linares C', 'mNeumologia', 'j'),
-(14, 'Dra Silva', 'm2MedGener', 'g'),
-(15, 'Dra Martinez', 'mMedInter', 'h');
+(1, 'Dr. Maya', 'MCirugia', 'k'),
+(2, 'Dr Trujillo', 'TCirugia', 'k'),
+(3, 'Dr Loo', 'MCardiologia', 'a'),
+(4, 'Dra Paredes', 'TCardiologia', 'a'),
+(5, 'Dr Curbelo', 'MEcografia', 'aa'),
+(6, 'Dr Quiroga', 'TEcografia', 'aa'),
+(7, 'Dr Bendezu', 'mDermatologia', 'b'),
+(8, 'Dr Garibay', 'TDermatologia', 'b'),
+(9, 'Dr Obregon', 'MEndocrinologia', 'c'),
+(10, 'Dr Ruiz', 'TEndicronologia', 'c'),
+(11, 'Dr Astocondor', 'MGeriatria', 'd'),
+(12, 'Dr Oyola', 'TGeriatria', 'd'),
+(13, 'Dr Linares C', 'MGinecologia', 'e'),
+(14, 'Dra Silva', 'TgGinecologia', 'e'),
+(15, 'Dra Martinez', 'MHematologia', 'f'),
+(16, 'Dr Carrion', 'THematologia', 'f'),
+(17, 'Dra Ruiz', 'MMedGeneral', 'g'),
+(18, 'Dra Polo', 'TMedGeneral', 'g'),
+(19, 'Dr Escobar', 'MMedInterna', 'h'),
+(20, 'Dra Palacios', 'TMedInterna', 'h'),
+(21, 'Dr Martinez', 'MMedIntegral', 'i'),
+(22, 'Dra Linares', 'TMedIntegral', 'i'),
+(23, 'Dr Thomas', 'MNeumologia', 'j'),
+(24, 'Dra Cristina', 'TNeumologia', 'l'),
+(25, 'Dr Mires', 'MNutricionista', 'l'),
+(26, 'Dra Gomez', 'TNutricionista', 'k'),
+(27, 'Dr Toledo', 'MOdontologia', 'm'),
+(28, 'Dra Pino', 'TOdontologia', 'm'),
+(29, 'Dr Edgar', 'MOftalmologia', 'n'),
+(30, 'Dra Elena', 'TOftalmologia', 'n'),
+(31, 'Dra Efrain', 'MPediatria', 'o'),
+(32, 'Dra Elizabeth', 'TPediatria', 'o'),
+(33, 'Dr Eloy', 'MPodologia', 'p'),
+(34, 'Dra Elvira', 'TPodologia', 'p'),
+(35, 'Dr Emilio', 'MPsicologia', 'q'),
+(36, 'Dra Emma', 'TPsicologia', 'q'),
+(37, 'Dr Emanuel', 'MPsiquiatria', 'r'),
+(38, 'Dra Erica', 'TPsiquiatria', 'r'),
+(39, 'Dr Ernesto', 'MTraumatologia', 's'),
+(40, 'Dra Sofia', 'TTraumatologia', 's');
 
 -- --------------------------------------------------------
 
@@ -85,28 +136,26 @@ CREATE TABLE `especialidad` (
 --
 
 INSERT INTO `especialidad` (`codesp`, `nomesp`, `consultorio`) VALUES
-('a', 'Cardiología', ''),
-('aa', 'Ecografia', ''),
-('b', 'Dermatología', ''),
-('c', 'Endocrinología', ''),
-('d', 'Geriatría', ''),
-('e', 'Ginecología', ''),
-('f', 'Hematología', ''),
-('g', 'Medicina General', ''),
-('h', 'Medicina Interna', ''),
-('i', 'Medicina Integral', ''),
-('j', 'Neumología', ''),
-('k', 'Cirugía', ''),
-('l', 'Nutricionista', ''),
-('m', 'Odontogía', ''),
-('n', 'Oftalmología', ''),
-('o', 'Pediatría', ''),
-('p', 'Podología', ''),
-('q', 'Psicología', ''),
-('r', 'Psiquiatría', ''),
-('s', 'Psiquiatría', ''),
-('t', 'Traumatología', ''),
-('u', 'Tomografía', '');
+('a', 'Cardiología', 'A-21'),
+('aa', 'Ecografia', 'A-33'),
+('b', 'Dermatología', 'B-12'),
+('c', 'Endocrinología', 'B-13'),
+('d', 'Geriatría', 'C-23'),
+('e', 'Ginecología', 'C-24'),
+('f', 'Hematología', 'D-15'),
+('g', 'Medicina General', 'D-22'),
+('h', 'Medicina Interna', 'E-15'),
+('i', 'Medicina Integral', 'E-21'),
+('j', 'Neumología', 'A-25'),
+('k', 'Cirugía', 'B-24'),
+('l', 'Nutricionista', 'C-11'),
+('m', 'Odontogía', 'D-14'),
+('n', 'Oftalmología', 'D-16'),
+('o', 'Pediatría', 'D-15'),
+('p', 'Podología', 'A-27'),
+('q', 'Psicología', 'B-12'),
+('r', 'Psiquiatría', 'C-11'),
+('s', 'Traumatologia', 'C-56');
 
 -- --------------------------------------------------------
 
@@ -115,31 +164,9 @@ INSERT INTO `especialidad` (`codesp`, `nomesp`, `consultorio`) VALUES
 --
 
 CREATE TABLE `horario` (
-  `Hora` time NOT NULL
+  `refDoc` int(25) NOT NULL,
+  `Turno` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `horario`
---
-
-INSERT INTO `horario` (`Hora`) VALUES
-('07:00:00'),
-('07:15:00'),
-('07:20:00'),
-('07:30:00'),
-('07:45:00'),
-('08:00:00'),
-('08:30:00'),
-('09:00:00'),
-('11:30:00'),
-('13:00:00'),
-('13:45:00'),
-('14:00:00'),
-('14:30:00'),
-('15:00:00'),
-('16:00:00'),
-('17:30:00'),
-('18:00:00');
 
 -- --------------------------------------------------------
 
@@ -160,40 +187,6 @@ CREATE TABLE `pacientegeneral` (
   `nacimiento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `turno`
---
-
-CREATE TABLE `turno` (
-  `Turnoat` varchar(15) NOT NULL,
-  `refHorario` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `turno`
---
-
-INSERT INTO `turno` (`Turnoat`, `refHorario`) VALUES
-('mañana', '07:00:00'),
-('mEndocrino', '08:00:00'),
-('mMedInter', '08:00:00'),
-('mPsiquiatria', '08:00:00'),
-('m2MedGener', '08:30:00'),
-('mMedGener', '08:30:00'),
-('mCardio', '09:00:00'),
-('mCirugia', '09:00:00'),
-('mNeumologia', '09:00:00'),
-('tGineco', '13:00:00'),
-('tCirugia', '13:45:00'),
-('m2Cardio', '14:00:00'),
-('tTrauma', '14:30:00'),
-('t2Cirugia', '16:00:00'),
-('tHemato', '17:30:00'),
-('t2Gineco', '18:00:00'),
-('t2Trauma', '18:00:00');
-
 --
 -- Índices para tablas volcadas
 --
@@ -206,7 +199,7 @@ ALTER TABLE `cita`
   ADD KEY `refEsp` (`refEsp`),
   ADD KEY `refcodpac` (`refcodpac`),
   ADD KEY `refturno` (`refturno`),
-  ADD KEY `refhorario` (`refhorario`),
+  ADD KEY `refhorario` (`refDoc`),
   ADD KEY `refcodpac_2` (`refcodpac`);
 
 --
@@ -216,7 +209,10 @@ ALTER TABLE `doctor`
   ADD PRIMARY KEY (`codigodoc`),
   ADD UNIQUE KEY `nombredoc` (`nombredoc`),
   ADD KEY `especialidadoc` (`especialidadoc`),
-  ADD KEY `turnodoc` (`turnodoc`);
+  ADD KEY `turnodoc` (`turnodoc`),
+  ADD KEY `turnodoc_2` (`turnodoc`),
+  ADD KEY `turnodoc_3` (`turnodoc`),
+  ADD KEY `turnodoc_4` (`turnodoc`);
 
 --
 -- Indices de la tabla `especialidad`
@@ -228,8 +224,8 @@ ALTER TABLE `especialidad`
 -- Indices de la tabla `horario`
 --
 ALTER TABLE `horario`
-  ADD PRIMARY KEY (`Hora`),
-  ADD UNIQUE KEY `Hora` (`Hora`);
+  ADD PRIMARY KEY (`Turno`),
+  ADD KEY `refDoc` (`refDoc`);
 
 --
 -- Indices de la tabla `pacientegeneral`
@@ -239,18 +235,14 @@ ALTER TABLE `pacientegeneral`
   ADD UNIQUE KEY `dni` (`dni`);
 
 --
--- Indices de la tabla `turno`
---
-ALTER TABLE `turno`
-  ADD PRIMARY KEY (`Turnoat`),
-  ADD KEY `refHorario` (`refHorario`),
-  ADD KEY `refHorario_2` (`refHorario`),
-  ADD KEY `refHorario_3` (`refHorario`);
-
---
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
+--
+-- AUTO_INCREMENT de la tabla `cita`
+--
+ALTER TABLE `cita`
+  MODIFY `codcita` int(10) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `pacientegeneral`
 --
@@ -265,22 +257,21 @@ ALTER TABLE `pacientegeneral`
 --
 ALTER TABLE `cita`
   ADD CONSTRAINT `cita_ibfk_1` FOREIGN KEY (`refEsp`) REFERENCES `especialidad` (`codesp`),
-  ADD CONSTRAINT `cita_ibfk_2` FOREIGN KEY (`refturno`) REFERENCES `turno` (`Turnoat`),
-  ADD CONSTRAINT `cita_ibfk_3` FOREIGN KEY (`refhorario`) REFERENCES `horario` (`Hora`),
-  ADD CONSTRAINT `cita_ibfk_4` FOREIGN KEY (`refcodpac`) REFERENCES `pacientegeneral` (`codigo`);
+  ADD CONSTRAINT `cita_ibfk_4` FOREIGN KEY (`refcodpac`) REFERENCES `pacientegeneral` (`codigo`),
+  ADD CONSTRAINT `cita_ibfk_5` FOREIGN KEY (`refDoc`) REFERENCES `doctor` (`nombredoc`),
+  ADD CONSTRAINT `cita_ibfk_6` FOREIGN KEY (`refturno`) REFERENCES `horario` (`Turno`);
 
 --
 -- Filtros para la tabla `doctor`
 --
 ALTER TABLE `doctor`
-  ADD CONSTRAINT `doctor_ibfk_1` FOREIGN KEY (`turnodoc`) REFERENCES `turno` (`Turnoat`),
   ADD CONSTRAINT `doctor_ibfk_2` FOREIGN KEY (`especialidadoc`) REFERENCES `especialidad` (`codesp`);
 
 --
--- Filtros para la tabla `turno`
+-- Filtros para la tabla `horario`
 --
-ALTER TABLE `turno`
-  ADD CONSTRAINT `turno_ibfk_1` FOREIGN KEY (`refHorario`) REFERENCES `horario` (`Hora`);
+ALTER TABLE `horario`
+  ADD CONSTRAINT `horario_ibfk_1` FOREIGN KEY (`refDoc`) REFERENCES `doctor` (`codigodoc`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
