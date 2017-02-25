@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-02-2017 a las 21:57:51
+-- Tiempo de generación: 25-02-2017 a las 07:36:11
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -56,7 +56,7 @@ CREATE TABLE `cita` (
   `codcita` int(10) NOT NULL,
   `refEsp` varchar(20) NOT NULL,
   `refcodpac` int(10) NOT NULL,
-  `refturno` varchar(15) NOT NULL,
+  `hora_atenc` time NOT NULL,
   `refDoc` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -164,9 +164,56 @@ INSERT INTO `especialidad` (`codesp`, `nomesp`, `consultorio`) VALUES
 --
 
 CREATE TABLE `horario` (
-  `refDoc` int(25) NOT NULL,
-  `Turno` varchar(30) NOT NULL
+  `CodHorario` int(7) NOT NULL,
+  `Turno` varchar(25) NOT NULL,
+  `refDoc` int(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `horario`
+--
+
+INSERT INTO `horario` (`CodHorario`, `Turno`, `refDoc`) VALUES
+(1, '7:00am. - 12:00m.', 1),
+(4, '1:30pm. - 4:00pm.', 2),
+(5, '7:00am. - 12:00m.', 3),
+(6, '1:30pm. - 4:00pm.', 4),
+(7, '7:00am. - 12:00m.', 5),
+(8, '1:30pm. - 4:00pm.', 6),
+(9, '7:00am. - 12:00m.', 7),
+(10, '1:30pm. - 4:00pm.', 8),
+(11, '7:00am. - 12:00m.', 9),
+(12, '1:30pm. - 4:00pm.', 10),
+(13, '7:00am. - 12:00m.', 11),
+(14, '1:30pm. - 4:00pm.', 12),
+(15, '7:00am. - 12:00m.', 13),
+(16, '1:30pm. - 4:00pm.', 14),
+(17, '7:00am. - 12:00m.', 15),
+(18, '1:30pm. - 4:00pm.', 16),
+(19, '7:00am. - 12:00m.', 17),
+(20, '1:30pm. - 4:00pm.', 18),
+(21, '7:00am. - 12:00m.', 19),
+(22, '1:30pm. - 4:00pm.', 20),
+(23, '7:00am. - 12:00m.', 21),
+(24, '1:30pm. - 4:00pm.', 22),
+(25, '7:00am. - 12:00m.', 23),
+(26, '1:30pm. - 4:00pm.', 24),
+(27, '7:00am. - 12:00m.', 25),
+(28, '1:30pm. - 4:00pm.', 26),
+(29, '7:00am. - 12:00m.', 27),
+(30, '1:30pm. - 4:00pm.', 28),
+(31, '7:00am. - 12:00m.', 29),
+(32, '1:30pm. - 4:00pm.', 30),
+(33, '7:00am. - 12:00m.', 31),
+(34, '1:30pm. - 4:00pm.', 32),
+(35, '7:00am. - 12:00m.', 33),
+(36, '1:30pm. - 4:00pm.', 34),
+(37, '7:00am. - 12:00m.', 35),
+(38, '1:30pm. - 4:00pm.', 36),
+(39, '7:00am. - 12:00m.', 37),
+(40, '1:30pm. - 4:00pm.', 38),
+(41, '7:00am. - 12:00m.', 39),
+(42, '1:30pm. - 4:00pm.', 40);
 
 -- --------------------------------------------------------
 
@@ -188,6 +235,32 @@ CREATE TABLE `pacientegeneral` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Volcado de datos para la tabla `pacientegeneral`
+--
+
+INSERT INTO `pacientegeneral` (`codigo`, `nombre`, `appaterno`, `apmaterno`, `sexo`, `dni`, `edad`, `peso`, `talla`, `nacimiento`) VALUES
+(1, 'July ', 'Torres', 'Chavez', 'F', 48533198, 23, '55.0', '1.65', '1994-01-04'),
+(2, 'Vannesa', 'Alvarado', 'Figueroa', 'F', 54677839, 20, '65.0', '1.70', '1997-11-28'),
+(3, 'Sebastian ', 'Vargas', 'Canepa', 'M', 76789956, 56, '78.0', '1.82', '1960-04-06'),
+(4, 'Jose Carlos', 'Montes', 'Rojas', 'M', 89776493, 34, '76.0', '1.78', '1982-07-08'),
+(5, 'Cristopher', 'Venegas', 'Garibay', 'M', 46753688, 25, '67.0', '1.68', '1991-09-17'),
+(6, 'Luis', 'Garcia', 'Cajavilca', 'M', 47865213, 45, '72.0', '1.70', '1971-11-03'),
+(7, 'Sandra', 'Paola', 'Alvarez', 'F', 36748594, 28, '59.0', '1.70', '1989-06-25'),
+(8, 'Alexandra', 'Mendiola', 'Flores', 'F', 34567353, 32, '60.0', '1.72', '1957-02-13'),
+(9, 'Edgar', 'Murga', 'Orellana', 'M', 54677865, 26, '75.0', '1.72', '1990-09-04'),
+(10, 'Camila', 'Trujillo', 'Vidal', 'F', 54678354, 12, '49.0', '1.58', '2005-01-19'),
+(11, 'Macarena', 'Veles', 'Samaniego', 'F', 34453467, 35, '67.0', '1.72', '1981-12-16'),
+(12, 'Lorena', 'Carrillo', 'Rojas', 'F', 45673856, 56, '65.0', '1.69', '1951-05-23'),
+(13, 'Francisco', 'Toledo', 'Ramirez', 'M', 65676489, 32, '78.0', '1.73', '1985-01-24'),
+(14, 'Lucia', 'Paima', 'Contreras', 'F', 5645376, 28, '65.0', '1.74', '1988-06-09'),
+(15, 'Sonia', 'Estrada', 'Privat', 'F', 65678753, 50, '74.0', '1.72', '1966-08-12'),
+(16, 'Rodrigo', 'Garcia', 'Miró', 'M', 34567895, 34, '80.0', '1.76', '1983-02-02'),
+(17, 'Nicola', 'Zavaleta', 'Chavez', 'M', 45698789, 23, '62.0', '1.68', '1992-01-30'),
+(18, 'Federico', 'Basalar', 'Monterico', 'M', 67645387, 19, '56.0', '1.65', '1997-10-21'),
+(19, 'Yahayra', 'Arteaga', 'Quelopana', 'F', 45678946, 22, '58.0', '1.73', '1994-09-12'),
+(20, 'Kasandra', 'Mendez', 'Lopez', 'F', 45637545, 25, '62.0', '1.72', '1991-06-18');
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -198,7 +271,7 @@ ALTER TABLE `cita`
   ADD PRIMARY KEY (`codcita`),
   ADD KEY `refEsp` (`refEsp`),
   ADD KEY `refcodpac` (`refcodpac`),
-  ADD KEY `refturno` (`refturno`),
+  ADD KEY `refturno` (`hora_atenc`),
   ADD KEY `refhorario` (`refDoc`),
   ADD KEY `refcodpac_2` (`refcodpac`);
 
@@ -224,7 +297,7 @@ ALTER TABLE `especialidad`
 -- Indices de la tabla `horario`
 --
 ALTER TABLE `horario`
-  ADD PRIMARY KEY (`Turno`),
+  ADD PRIMARY KEY (`CodHorario`),
   ADD KEY `refDoc` (`refDoc`);
 
 --
@@ -244,10 +317,15 @@ ALTER TABLE `pacientegeneral`
 ALTER TABLE `cita`
   MODIFY `codcita` int(10) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT de la tabla `horario`
+--
+ALTER TABLE `horario`
+  MODIFY `CodHorario` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+--
 -- AUTO_INCREMENT de la tabla `pacientegeneral`
 --
 ALTER TABLE `pacientegeneral`
-  MODIFY `codigo` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `codigo` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- Restricciones para tablas volcadas
 --
@@ -258,8 +336,7 @@ ALTER TABLE `pacientegeneral`
 ALTER TABLE `cita`
   ADD CONSTRAINT `cita_ibfk_1` FOREIGN KEY (`refEsp`) REFERENCES `especialidad` (`codesp`),
   ADD CONSTRAINT `cita_ibfk_4` FOREIGN KEY (`refcodpac`) REFERENCES `pacientegeneral` (`codigo`),
-  ADD CONSTRAINT `cita_ibfk_5` FOREIGN KEY (`refDoc`) REFERENCES `doctor` (`nombredoc`),
-  ADD CONSTRAINT `cita_ibfk_6` FOREIGN KEY (`refturno`) REFERENCES `horario` (`Turno`);
+  ADD CONSTRAINT `cita_ibfk_5` FOREIGN KEY (`refDoc`) REFERENCES `doctor` (`nombredoc`);
 
 --
 -- Filtros para la tabla `doctor`
