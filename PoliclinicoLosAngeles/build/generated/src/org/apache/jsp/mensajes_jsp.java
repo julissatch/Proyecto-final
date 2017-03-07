@@ -8,7 +8,7 @@ import java.util.Calendar;
 import model.conexion;
 import java.sql.*;
 
-public final class principal_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class mensajes_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -168,19 +168,7 @@ public final class principal_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t  </div>\n");
       out.write("\t\t\t</nav>\n");
       out.write("                        \n");
-      out.write("                        \n");
-      out.write("                        \n");
-      out.write("                        \n");
-      out.write("                        \n");
-      out.write("                        \n");
-      out.write("                        \n");
-      out.write("                        \n");
       out.write("\t\t\t<div class=\"container\">\n");
-      out.write("\n");
-      out.write("                            \n");
-      out.write("                            \n");
-      out.write("                    \n");
-      out.write("                            \n");
       out.write("            \n");
       out.write("            <div class=\"citas col-sm-4 \">\n");
       out.write("            <h1 class=\"boxes\">Citas</h1>\n");

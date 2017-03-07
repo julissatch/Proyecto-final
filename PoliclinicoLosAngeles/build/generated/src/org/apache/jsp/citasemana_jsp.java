@@ -106,7 +106,7 @@ public final class citasemana_jsp extends org.apache.jasper.runtime.HttpJspBase
                     
       out.write("\n");
       out.write("                    \n");
-      out.write("   \n");
+      out.write("                    <div class=\"container\" style=\"padding-top: 100px;\">\n");
       out.write("    ");
 
                           try{
@@ -119,6 +119,8 @@ public final class citasemana_jsp extends org.apache.jasper.runtime.HttpJspBase
                         ResultSet resultado3=consulta3.executeQuery();
                             
                             while(resultado3.next()){
+                                
+                                if(resultado3.getInt(1)>=dia){
                                 
                                     out.println("<div class=\"container\">");
                                     out.println("<div class=\"tablamedico col-md-10\">");
@@ -154,12 +156,16 @@ public final class citasemana_jsp extends org.apache.jasper.runtime.HttpJspBase
                                     out.println("</table>");
                                     out.println("</div>");
                                     out.println("</div>");
+                                    
+                                    
+                                }
+                                    
                             }
                         conexion.cerrar();
                         }catch(Exception ex){out.println(ex.toString());}
                           
 
-                        try{
+                          try{
                               Connection conex=conexion.obtener();
                               
                         Calendar now = Calendar.getInstance();
@@ -170,15 +176,17 @@ public final class citasemana_jsp extends org.apache.jasper.runtime.HttpJspBase
                             
                             while(resultado3.next()){
                                 
+                                if(resultado3.getInt(1)>=dia){
+                                
                                     out.println("<div class=\"container\">");
                                     out.println("<div class=\"tablamedico col-md-10\">");
                                     out.println("<table class=\"table table-hove\">");
                                     out.println("<thead>");
-                                    out.println("<tr><th>Cod.Cita</th><th>Cod.Paciente</th><th>Nombre</th><th>Ap.Paterno</th><th>Ap.Materno</th><th>Especialidad</th><th>Hora</th><th>Doctor</th></tr>");
+                                    out.println("<tr><th>Cod.Cita</th><th>Cod.Paciente</th><th>Nombre</th><th>Ap.Paterno</th><th>Ap.Materno</th><th>Especialidad</th><th>Hora</th><th>Doctor</th><th>Opción</th></tr>");
                                     out.println("</thead>");
                                     out.println("<tbody>");
                                     
-                                    out.println("<h3>"+resultado3.getString(2)+" (Tarde)</h3>");
+                                    out.println("<h3>"+resultado3.getString(2)+" (Mañana)</h3>");
                                     
                             PreparedStatement consulta=conex.prepareStatement("call cita_select();");
                             ResultSet resultado=consulta.executeQuery();        
@@ -194,7 +202,7 @@ public final class citasemana_jsp extends org.apache.jasper.runtime.HttpJspBase
          
                             out.println("<tr> <td>"+resultado.getInt(1)+"</td> <td>"+resultado.getInt(3)+"</td> <td>"+resultado2.getString(2)+
                                     "</td> <td>"+resultado2.getString(3)+"</td>  <td>"+resultado2.getString(4)+"</td>  <td>"+resultado.getString(2)+
-                                    "</td>  <td>"+resultado.getString(4)+"</td>  <td>"+resultado.getString(5)+"</td> </tr>");
+                                    "</td>  <td>"+resultado.getString(4)+"</td>  <td>"+resultado.getString(5)+"</td> <form class=\"form\" role=\"form\" method=\"post\" action=\"validarcita\"><td><button type=\"submit\" class=\"btn btn-success\">Eliminar Cita</button></td></form></tr>");
                             
                                     }
                                 
@@ -204,6 +212,10 @@ public final class citasemana_jsp extends org.apache.jasper.runtime.HttpJspBase
                                     out.println("</table>");
                                     out.println("</div>");
                                     out.println("</div>");
+                                    
+                                    
+                                }
+                                    
                             }
                         conexion.cerrar();
                         }catch(Exception ex){out.println(ex.toString());}
@@ -213,7 +225,7 @@ public final class citasemana_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
-      out.write("\n");
+      out.write("                        </div>\n");
       out.write("\n");
       out.write("\n");
       out.write("\n");

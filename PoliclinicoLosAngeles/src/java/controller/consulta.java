@@ -18,7 +18,7 @@ import model.DAO.usuario;
  *
  * @author KEVIN
  */
-public class validarcita extends HttpServlet {
+public class consulta extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,48 +33,26 @@ public class validarcita extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            String nombre=request.getParameter("nombre");
+            String correo=request.getParameter("correo");
+            String asunto=request.getParameter("asunto");
+            String mensaje=request.getParameter("mensaje");
             
-            //String especialidad=request.getParameter("nombre");
-            String especialidad=request.getParameter("especialidad");
-            String dia=request.getParameter("dia");
-            String hora=request.getParameter("hora");
-            int codigopaciente=Integer.parseInt(request.getParameter("codigo"));
-            int day=Integer.parseInt(request.getParameter("day"));
-            int mes=Integer.parseInt(request.getParameter("mes"));
-            int anio=Integer.parseInt(request.getParameter("anio"));
-            String fecha=""+day+" - "+mes+" - "+anio;
-            
+//            String tipo=request.getParameter("tipo");
 
+            JOptionPane.showMessageDialog(null, ""+nombre+" "+correo+" "+asunto+" "+" "+mensaje);
+            
 //            request.getSession().setAttribute("codigo", codigo);
-//            request.getSession().setAttribute("ddni", dni);
+//            request.getSession().setAttribute("codigo", codigo);
 //            
     usuario objUsuario=new usuario();
-        if (objUsuario.GetCita(especialidad.trim(),dia.trim(),hora.trim())) {
-            
-        String doctor=objUsuario.SearchDoctor(especialidad.trim(),dia.trim(),hora.trim());
-        
-                JOptionPane.showMessageDialog(null, especialidad.trim()+" "+codigopaciente+" "+hora.trim()+" "+doctor.trim()+" "+fecha.trim()+" "+dia.trim());
-        
-        objUsuario.SetCita(especialidad.trim(), codigopaciente, hora.trim(), doctor.trim(), fecha.trim(), dia.trim());
-            
-//            request.getRequestDispatcher("principal.jsp").forward(request, response);//Normal
-//            response.sendRedirect("/principal.jsp");
-            String redirectURL="principal.jsp";
-            response.sendRedirect(redirectURL);        
-        
-//            String nombre=objUsuario.GetNombrePaciente(codigo, dni);
-//            request.getSession().setAttribute("nombre", nombre);
-//            String redirectURL="principal.jsp";
-//        response.sendRedirect(redirectURL);
-//            
-            
+    
+            objUsuario.SendConsulta(nombre,correo,asunto,mensaje);
+
+            String redirectURL="login.jsp";
+            response.sendRedirect(redirectURL);
         }
-    else{
-            
-        String redirectURL="cita.jsp";
-        response.sendRedirect(redirectURL);
-    }
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -46,9 +46,9 @@
       
       <% 
         //String codigo = (String)session.getAttribute("codigo");
-        int codigo = (int)session.getAttribute("codigo");
-        String nombre = (String)session.getAttribute("nombre");
-        JOptionPane.showMessageDialog(null, "Codigo del paciente: "+codigo);
+        //int codigo = (int)session.getAttribute("codigo");
+        //String nombre = (String)session.getAttribute("nombre");
+        //JOptionPane.showMessageDialog(null, "Codigo del paciente: "+codigo);
         %> 
       
   	<!--banner-->
@@ -101,11 +101,11 @@
                         <%
                             
                                             
-                                            out.println("<li class=\"active\">"
-                                                    + "<form action=\"principal.jsp\" method=\"post\">"
-                                                    + "<input type=\"submit\" value=\""+nombre+"\" style=\"font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-color: transparent;background-color: rgba(12, 184, 182, 0.21);\">"
-                                                    + "</form>"
-                                                    + "</li>");
+                                         //   out.println("<li class=\"active\">"
+                                           //         + "<form action=\"principal.jsp\" method=\"post\">"
+                                             //       + "<input type=\"submit\" value=\""+nombre+"\" style=\"font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-color: transparent;background-color: rgba(12, 184, 182, 0.21);\">"
+                                              //      + "</form>"
+                                                //    + "</li>");
                         
                         
                         
@@ -119,55 +119,39 @@
 			  </div>
 			</nav>
                         
-                        
-                        
-                        
-                        
-                        
-                        
-                        
 			<div class="container">
-
-                            
-                            
-                    
-                            
             
             <div class="citas col-sm-4 ">
-            <h1 class="boxes">Citas</h1>
+            <h1 class="boxes">Mensajes</h1>
             <%                        
                 int codigocita=0;
                 try{  
                         Connection conex=conexion.obtener();
-                        PreparedStatement consulta=conex.prepareStatement("call cita_select();");
+                        PreparedStatement consulta=conex.prepareStatement("call mensajes_select();");
                         
                         ResultSet resultado=consulta.executeQuery();
                         
                         while(resultado.next()){
-                            if (resultado.getInt(3)==codigo) {
-                out.print("<form action=\"eliminarcita\" method=\"post\">");  
-                out.println("<textarea class=\"bookes\" name=\"message\" rows=\"12\" cols=\"85\" disabled=\"\">");
-                out.println("                  LUGAR DE CONSULTA :  POLICLÍNICO NUESTRA SEÑORA DE LOS ANGELES");
-                out.print("                  CODIGO DE CITA :  ");  out.println(resultado.getInt(1));codigocita=resultado.getInt(1);
-                out.print("                  PACIENTE :  ");  out.println(nombre.toUpperCase());
-                out.print("                  ESPECIALIDAD :  ");  out.println(resultado.getString(2).toUpperCase());
-                out.print("                  FECHA :  ");  out.println(resultado.getString(6));
-                out.print("                  HORA DE CITA :  ");  out.println(resultado.getString(4));
-                out.print("                  DOCTOR(A) :  ");  out.println(resultado.getString(5).toUpperCase());
-                out.println("                  COSTO DE CITA :  10.00 SOLES");out.println("");
-                out.println("                  El paciente tendrá que acercarse a caja para cancelar el monto de la cita y");
-                out.println("                  posteriormente acudir a su cita en el consultorio establecido en el recibo.");
-                out.println("                                                                                                                         - Administración");
+                out.print("<form action=\"eliminarmensaje\" method=\"post\">");  
+                out.println("<textarea style=\"padding-left: 40px;\" class=\"bookes\" name=\"message\" rows=\"6\" cols=\"70\" disabled=\"\">");
+                //out.println("                  LUGAR DE CONSULTA :  POLICLÍNICO NUESTRA SEÑORA DE LOS ANGELES");
+                out.print("NOMBRE :  ");  out.println(resultado.getString(2).toUpperCase());
+                out.print("CORREO :  ");  out.println(resultado.getString(3).toUpperCase());
+                out.print("ASUNTO :  ");  out.println(resultado.getString(4).toUpperCase());
+                out.print("MENSAJE :  ");  out.println(resultado.getString(5).toUpperCase());
+                
+                //out.println("                  El paciente tendrá que acercarse a caja para cancelar el monto de la cita y");
+                //out.println("                  posteriormente acudir a su cita en el consultorio establecido en el recibo.");
+                //out.println("                                                                                                                         - Administración");
                 out.print("</textarea>");
                                 
                 //Acá va el form.            
                                   
                 out.print("<div class=\"form-group col-md-5  pull-right\">");
-                out.print("<button type=\"submit\" class=\"btn btn-primary btn-block\">Eliminar Cita</button>");
-                out.print("<input type=\"hidden\" name=\"codigocita\" value=\""+codigocita+"\">");
+                out.print("<button type=\"submit\" class=\"btn btn-primary\">Eliminar Mensaje</button>");
+                out.print("<input type=\"hidden\" name=\"codigomensaje\" value=\""+resultado.getInt(1)+"\">");
                 out.print("</div>");
                 out.print("</form>");//JOptionPane.showMessageDialog(null, "Codigo de la cita: "+resultado.getInt(1));
-                            }            
                         }
                         conexion.cerrar();
                 }catch(Exception ex){out.println(ex.toString());}

@@ -18,7 +18,7 @@ import model.DAO.usuario;
  *
  * @author KEVIN
  */
-public class validarcita extends HttpServlet {
+public class eliminarmensaje extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,46 +34,14 @@ public class validarcita extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            //String especialidad=request.getParameter("nombre");
-            String especialidad=request.getParameter("especialidad");
-            String dia=request.getParameter("dia");
-            String hora=request.getParameter("hora");
-            int codigopaciente=Integer.parseInt(request.getParameter("codigo"));
-            int day=Integer.parseInt(request.getParameter("day"));
-            int mes=Integer.parseInt(request.getParameter("mes"));
-            int anio=Integer.parseInt(request.getParameter("anio"));
-            String fecha=""+day+" - "+mes+" - "+anio;
+            int codigomensaje=Integer.parseInt(request.getParameter("codigomensaje"));
             
+            
+                usuario objUsuario=new usuario();
+            objUsuario.DeleteMensaje(codigomensaje);
+            String redirectURL="mensajes.jsp";
+            response.sendRedirect(redirectURL);            
 
-//            request.getSession().setAttribute("codigo", codigo);
-//            request.getSession().setAttribute("ddni", dni);
-//            
-    usuario objUsuario=new usuario();
-        if (objUsuario.GetCita(especialidad.trim(),dia.trim(),hora.trim())) {
-            
-        String doctor=objUsuario.SearchDoctor(especialidad.trim(),dia.trim(),hora.trim());
-        
-                JOptionPane.showMessageDialog(null, especialidad.trim()+" "+codigopaciente+" "+hora.trim()+" "+doctor.trim()+" "+fecha.trim()+" "+dia.trim());
-        
-        objUsuario.SetCita(especialidad.trim(), codigopaciente, hora.trim(), doctor.trim(), fecha.trim(), dia.trim());
-            
-//            request.getRequestDispatcher("principal.jsp").forward(request, response);//Normal
-//            response.sendRedirect("/principal.jsp");
-            String redirectURL="principal.jsp";
-            response.sendRedirect(redirectURL);        
-        
-//            String nombre=objUsuario.GetNombrePaciente(codigo, dni);
-//            request.getSession().setAttribute("nombre", nombre);
-//            String redirectURL="principal.jsp";
-//        response.sendRedirect(redirectURL);
-//            
-            
-        }
-    else{
-            
-        String redirectURL="cita.jsp";
-        response.sendRedirect(redirectURL);
-    }
         }
     }
 

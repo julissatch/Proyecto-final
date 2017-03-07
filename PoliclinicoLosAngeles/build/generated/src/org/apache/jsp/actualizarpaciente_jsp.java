@@ -174,8 +174,27 @@ out.println(resultado.getString(4));
       out.write("            <div class=\"col-md-3\" style=\"margin: 10px;\">\n");
       out.write("            <label for=\"example-text-input\" class=\"col-2 col-form-label\" style=\"color: #ffffff;\">Sexo</label>\n");
       out.write("              <select class=\"form-control\" name=\"sexo\" id=\"sel1\">\n");
-      out.write("                <option value=\"M\">Masculino</option>\n");
-      out.write("                <option value=\"F\">Femenino</option>\n");
+      out.write("                \n");
+      out.write("                ");
+
+                if (resultado.getString(5).equalsIgnoreCase("M")) {
+      out.write("\n");
+      out.write("                    <option value=\"M\">Masculino</option>\n");
+      out.write("                    <option value=\"F\">Femenino</option>    \n");
+      out.write("                ");
+  }  
+      out.write("\n");
+      out.write("                  \n");
+      out.write("                ");
+
+                if (resultado.getString(5).equalsIgnoreCase("F")) {
+      out.write("\n");
+      out.write("                    <option value=\"F\">Femenino</option>\n");
+      out.write("                    <option value=\"M\">Masculino</option>\n");
+      out.write("                ");
+  }  
+      out.write("\n");
+      out.write("                \n");
       out.write("              </select>\n");
       out.write("            </div>\n");
       out.write("\n");
@@ -183,40 +202,34 @@ out.println(resultado.getString(4));
       out.write("            <label for=\"example-email-input\" class=\"col-2 col-form-label\" style=\"color: #ffffff;\">DNI</label>\n");
       out.write("              <input class=\"form-control\" name=\"dni\" type=\"text\" value=\"");
 out.println(resultado.getInt(6));
-      out.write("\" required>\n");
+      out.write("\" maxlength=\"7\" required>\n");
       out.write("            </div>\n");
       out.write("\n");
       out.write("            <div class=\"col-md-3\" style=\"margin: 10px;\">\n");
       out.write("            <label for=\"example-email-input\" class=\"col-2 col-form-label\" style=\"color: #ffffff;\">Edad</label>\n");
       out.write("              <input class=\"form-control\" name=\"edad\" type=\"text\" value=\"");
 out.println(resultado.getInt(7));
-      out.write("\" required>\n");
+      out.write("\" maxlength=\"3\" required>\n");
       out.write("            </div>\n");
       out.write("\n");
       out.write("            <div class=\"col-md-3\" style=\"margin: 10px;\">\n");
-      out.write("            <label for=\"example-email-input\" class=\"col-2 col-form-label\" style=\"color: #ffffff;\">Peso</label>\n");
+      out.write("            <label for=\"example-email-input\" class=\"col-2 col-form-label\" style=\"color: #ffffff;\">Peso(Kg)</label>\n");
       out.write("              <input class=\"form-control\" name=\"peso\" type=\"text\" value=\"");
 out.println(resultado.getDouble(8));
-      out.write("\" required>\n");
+      out.write("\" maxlength=\"5\" title=\"Peso en Kg\" required>\n");
       out.write("            </div>\n");
       out.write("\n");
       out.write("            <div class=\"col-md-3\" style=\"margin: 10px;\">\n");
-      out.write("            <label for=\"example-email-input\" class=\"col-2 col-form-label\" style=\"color: #ffffff;\">Talla</label>\n");
+      out.write("            <label for=\"example-email-input\" class=\"col-2 col-form-label\" style=\"color: #ffffff;\">Talla(mts)</label>\n");
       out.write("              <input class=\"form-control\" name=\"talla\" type=\"text\" value=\"");
 out.println(resultado.getDouble(9));
-      out.write("\" required>\n");
+      out.write("\" maxlength=\"4\" title=\"Talla en mts\" required>\n");
       out.write("            </div>\n");
-      out.write("            \n");
-      out.write("              ");
-
-                  JOptionPane.showMessageDialog(null, resultado.getDate(10));
-              
-      out.write("\n");
       out.write("            \n");
       out.write("            <div class=\"col-md-3\" style=\"margin: 10px;\">\n");
       out.write("            <label for=\"example-date-input\" class=\"col-2 col-form-label\" style=\"color: #ffffff;\">Fecha de Nacimiento</label>\n");
-      out.write("            <input class=\"form-control\" name=\"fecha\" type=\"date\" value=\"2011-01-01");
-//out.println(resultado.getDate(10));
+      out.write("            <input class=\"form-control\" name=\"fecha\" type=\"date\" value=\"");
+out.print(resultado.getDate(10));
       out.write("\"required>\n");
       out.write("            </div>\n");
       out.write("\n");

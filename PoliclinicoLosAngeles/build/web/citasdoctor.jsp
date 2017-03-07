@@ -46,8 +46,6 @@
 				    <div class="collapse navbar-collapse navbar-right" id="myNavbar">
 				      <ul class="nav navbar-nav">
 				        <li class="active"><a href="#banner">Citas</a></li>
-				        <li class=""><a href="#services">Pacientes</a></li>
-				        <li class=""><a href="#contact">Actualizar Datos</a></li>
 				        <!--<li class=""><a href="#testimonial">Registro</a></li>-->
 
 
@@ -59,7 +57,8 @@
                     
                     
                     <% 
-                    String especialidad = (String)session.getAttribute("especialidad");
+                    String especialidaddoctor = (String)session.getAttribute("especialidaddoctor");
+                    String nombredoctor = (String)session.getAttribute("nombredoctor");
                     %>
                     
                     <div class="container" style="padding-top: 100px;">
@@ -97,7 +96,7 @@
                                 
                             while(resultado.next()){
                                 
-                                if (resultado.getString(4).charAt(6)=='A' && resultado.getInt(3)==resultado2.getInt(1) && resultado.getString(7).equalsIgnoreCase(resultado3.getString(2)) && resultado.getString(2).equalsIgnoreCase(especialidad)) {
+                                if (resultado.getString(5).equalsIgnoreCase(nombredoctor) && resultado.getInt(3)==resultado2.getInt(1) && resultado.getString(7).equalsIgnoreCase(resultado3.getString(2)) && resultado.getString(2).equalsIgnoreCase(especialidaddoctor)) {
          
                             out.println("<tr> <td>"+resultado.getInt(1)+"</td> <td>"+resultado.getInt(3)+"</td> <td>"+resultado2.getString(2)+
                                     "</td> <td>"+resultado2.getString(3)+"</td>  <td>"+resultado2.getString(4)+"</td>  <td>"+resultado.getString(2)+

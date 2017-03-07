@@ -109,13 +109,10 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\t\t\t\t\t<div class=\"form-group\">\n");
       out.write("\t\t\t\t\t\t\t\t\t\t\t <button type=\"submit\" class=\"btn btn-primary btn-block\">Login</button>\n");
       out.write("\t\t\t\t\t\t\t\t\t\t</div>Ingresar como:\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t<div class=\"checkbox\" style=\"margin-left: 50px;\">\n");
-      out.write("                                                                                         \n");
-      out.write("\t\t\t\t\t\t\t\t\t\t\t <input type=\"checkbox\" class=\"myCheckbox\" value=\"paciente\" name=\"tipo\" checked=\"checked\"/>Paciente\n");
-      out.write("                                                                                         <br>\n");
-      out.write("                                                                                         <input type=\"checkbox\" class=\"myCheckbox\" value=\"doctor\" name=\"tipo\" />Doctor\n");
-      out.write("                                                                                         <br>\n");
-      out.write("                                                                                         <input type=\"checkbox\" class=\"myCheckbox\" value=\"admin\" name=\"tipo\" />Admin\n");
+      out.write("                                                                                <div class=\"\">\n");
+      out.write("                                                                                         <input type=\"radio\" name=\"tipodelogin\" value=\"paciente\" checked>Paciente<br>\n");
+      out.write("                                                                                         <input type=\"radio\" name=\"tipodelogin\" value=\"doctor\">Doctor<br>\n");
+      out.write("                                                                                         <input type=\"radio\" name=\"tipodelogin\" value=\"admin\">Administrador\n");
       out.write("\t\t\t\t\t\t\t\t\t\t</div>\n");
       out.write("\t\t\t\t\t\t\t\t </form>\n");
       out.write("\t\t\t\t\t\t\t</div>\n");

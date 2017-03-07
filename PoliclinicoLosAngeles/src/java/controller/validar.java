@@ -33,29 +33,74 @@ public class validar extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            
+            String tipodelogin=request.getParameter("tipodelogin");
+            
             int codigo=Integer.parseInt(request.getParameter("codigo"));
             int dni=Integer.parseInt(request.getParameter("dni"));
-            String tipo=request.getParameter("tipo");
-            
-//            request.getSession().setAttribute("codigo", codigo);
             request.getSession().setAttribute("codigo", codigo);
             
-    usuario objUsuario=new usuario();
-    
-        if (objUsuario.GetDniPaciente(codigo,dni)) {
-            //request.getRequestDispatcher("principal.jsp").forward(request, response);//Normal
-            //response.sendRedirect("/principal.jsp");
+            usuario objUsuario=new usuario();
+            
+           switch(tipodelogin){
+               
+               case "paciente":
+            
+                if (objUsuario.GetDniPaciente(codigo,dni)) {
             String nombre=objUsuario.GetNombrePaciente(codigo, dni);
             request.getSession().setAttribute("nombre", nombre);
             String redirectURL="principal.jsp";
-        response.sendRedirect(redirectURL);
+            response.sendRedirect(redirectURL);}
+                
+                else{
+                    String redirectURL="login.jsp";JOptionPane.showMessageDialog(null, "54");
+                    response.sendRedirect(redirectURL);
+                }   
+                   break;
+               
+               
+               
+               case "doctor":
+                   
+                   
+                  if (objUsuario.GetDniDoctor(codigo,dni)) {
+            String especialidaddoctor=objUsuario.GetEspecialidadDoctor(codigo);
+            String nombredoctor=objUsuario.GetNombreDoctor(codigo);
+            request.getSession().setAttribute("codigo", codigo);
+            request.getSession().setAttribute("especialidaddoctor", especialidaddoctor);
+            request.getSession().setAttribute("nombredoctor", nombredoctor);
+            String redirectURL="citasdoctor.jsp";
+            response.sendRedirect(redirectURL);}
+                
+                else{
+                    String redirectURL="login.jsp";
+                    response.sendRedirect(redirectURL);
+                }   
+                   break;
+                   
+                   
+                   
+                   
+               case "admin":
+                  
+                   if (objUsuario.GetDniAdminnistrador(codigo,dni)) {
+            request.getSession().setAttribute("codigo", codigo);
+            String redirectURL="especialidades.jsp";
+            response.sendRedirect(redirectURL);}
+                
+                else{
+                    String redirectURL="login.jsp";
+                    response.sendRedirect(redirectURL);
+                }   
+                   
+                   break;
+               
+           } 
             
-        }
-    else{
-        //out.println("Está mal! Dumb!");
-        String redirectURL="login.jsp";JOptionPane.showMessageDialog(null, "54");
-        response.sendRedirect(redirectURL);
-    }
+            
+    
+    
+        
         }
     }
 

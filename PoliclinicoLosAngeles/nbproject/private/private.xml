@@ -2,6 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/KEVIN/Documents/NetBeansProjects/PoliclinicoLosAngeles/src/java/model/DAO/usuario.java</file>
+            <file>file:/C:/Users/KEVIN/Documents/NetBeansProjects/PoliclinicoLosAngeles/web/cita.jsp</file>
+            <file>file:/C:/Users/KEVIN/Documents/NetBeansProjects/PoliclinicoLosAngeles/src/java/controller/eliminarmensaje.java</file>
+            <file>file:/C:/Users/KEVIN/Documents/NetBeansProjects/PoliclinicoLosAngeles/web/pacientes.jsp</file>
+            <file>file:/C:/Users/KEVIN/Documents/NetBeansProjects/PoliclinicoLosAngeles/web/principal.jsp</file>
+            <file>file:/C:/Users/KEVIN/Documents/NetBeansProjects/PoliclinicoLosAngeles/src/java/controller/validarcita.java</file>
+            <file>file:/C:/Users/KEVIN/Documents/NetBeansProjects/PoliclinicoLosAngeles/web/historialpaciente.jsp</file>
+            <file>file:/C:/Users/KEVIN/Documents/NetBeansProjects/PoliclinicoLosAngeles/web/citasdoctor.jsp</file>
+        </group>
     </open-files>
 </project-private>

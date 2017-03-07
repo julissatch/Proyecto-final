@@ -69,24 +69,19 @@
                         Calendar now = Calendar.getInstance();
                         int dia=now.get(Calendar.DAY_OF_WEEK)-1;
                         
-                        PreparedStatement consulta3=conex.prepareStatement("call dia_select();");
-                        ResultSet resultado3=consulta3.executeQuery();
-                            
-                            while(resultado3.next()){
-                                
-                                if(resultado3.getInt(1)>=dia){
+                        
                                 
                                     out.println("<div class=\"container\">");
                                     out.println("<div class=\"tablamedico col-md-10\">");
                                     out.println("<table class=\"table table-hove\">");
                                     out.println("<thead>");
-                                    out.println("<tr><th>Cod.Cita</th><th>Cod.Paciente</th><th>Nombre</th><th>Ap.Paterno</th><th>Ap.Materno</th><th>Especialidad</th><th>Hora</th><th>Doctor</th><th>Opción</th></tr>");
+                                    out.println("<tr><th>Cod.Cita</th><th>Cod.Paciente</th><th>Nombre</th><th>Ap.Paterno</th><th>Ap.Materno</th><th>Especialidad</th><th>Hora</th><th>Doctor</th></tr>");
                                     out.println("</thead>");
                                     out.println("<tbody>");
                                     
-                                    out.println("<h3>"+resultado3.getString(2)+"</h3>");
+                                    out.println("<h3>Historial</h3>");
                                     
-                            PreparedStatement consulta=conex.prepareStatement("call cita_select();");
+                            PreparedStatement consulta=conex.prepareStatement("call historialcitas_select();");
                             ResultSet resultado=consulta.executeQuery();        
                                 
                             PreparedStatement consulta2=conex.prepareStatement("call pacientegeneral_select();");
@@ -96,13 +91,11 @@
                                 
                             while(resultado.next()){
                                 
-                                if (resultado.getString(5).equalsIgnoreCase(nombredoctor) && resultado.getInt(3)==resultado2.getInt(1) && resultado.getString(7).equalsIgnoreCase(resultado3.getString(2)) && resultado.getString(2).equalsIgnoreCase(especialidaddoctor)) {
          
                             out.println("<tr> <td>"+resultado.getInt(1)+"</td> <td>"+resultado.getInt(3)+"</td> <td>"+resultado2.getString(2)+
                                     "</td> <td>"+resultado2.getString(3)+"</td>  <td>"+resultado2.getString(4)+"</td>  <td>"+resultado.getString(2)+
-                                    "</td>  <td>"+resultado.getString(4)+"</td>  <td>"+resultado.getString(5)+"</td> <form class=\"form\" role=\"form\" method=\"post\" action=\"validarcita\"><td><button type=\"submit\" class=\"btn btn-success\">Eliminar Cita</button></td></form></tr>");
+                                    "</td>  <td>"+resultado.getString(4)+"</td>  <td>"+resultado.getString(5)+"</td></tr>");
                             
-                                    }
                                 
                             }    
                             }
@@ -112,9 +105,7 @@
                                     out.println("</div>");
                                     
                                     
-                                }
                                     
-                            }
                         conexion.cerrar();
                         }catch(Exception ex){out.println(ex.toString());}
 

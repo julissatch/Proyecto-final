@@ -151,6 +151,7 @@
                 out.print("                  CODIGO DE CITA :  ");  out.println(resultado.getInt(1));codigocita=resultado.getInt(1);
                 out.print("                  PACIENTE :  ");  out.println(nombre.toUpperCase());
                 out.print("                  ESPECIALIDAD :  ");  out.println(resultado.getString(2).toUpperCase());
+                out.print("                  FECHA :  ");  out.println(resultado.getString(6));
                 out.print("                  HORA DE CITA :  ");  out.println(resultado.getString(4));
                 out.print("                  DOCTOR(A) :  ");  out.println(resultado.getString(5).toUpperCase());
                 out.println("                  COSTO DE CITA :  10.00 SOLES");out.println("");

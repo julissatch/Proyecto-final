@@ -6,7 +6,7 @@ import javax.servlet.jsp.*;
 import model.conexion;
 import java.sql.*;
 
-public final class pacientes_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class historialpaciente_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();

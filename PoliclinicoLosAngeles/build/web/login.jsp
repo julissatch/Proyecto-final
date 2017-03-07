@@ -71,9 +71,9 @@
 											 <button type="submit" class="btn btn-primary btn-block">Login</button>
 										</div>Ingresar como:
                                                                                 <div class="">
-                                                                                         <input type="radio" name="gender" value="male" checked>Paciente<br>
-                                                                                        <input type="radio" name="gender" value="female">Doctor<br>
-                                                                                        <input type="radio" name="gender" value="other">Administrador
+                                                                                         <input type="radio" name="tipodelogin" value="paciente" checked>Paciente<br>
+                                                                                         <input type="radio" name="tipodelogin" value="doctor">Doctor<br>
+                                                                                         <input type="radio" name="tipodelogin" value="admin">Administrador
 										</div>
 								 </form>
 							</div>
@@ -216,21 +216,21 @@
               <div class="space"></div>
                             <div id="sendmessage">Your message has been sent. Thank you!</div>
                             <div id="errormessage"></div>
-              <form action="" method="post" role="form" class="contactForm">
+              <form action="consulta" method="post" role="form" class="contactForm">
                   <div class="form-group">
-                                    <input type="text" name="name" class="form-control br-radius-zero" id="name" placeholder="Nombre" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                    <input required type="text" name="nombre" class="form-control br-radius-zero" id="name" placeholder="Nombre" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                                     <div class="validation"></div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control br-radius-zero" name="email" id="email" placeholder="Correo" data-rule="email" data-msg="Please enter a valid email" />
+                                    <input required type="email" class="form-control br-radius-zero" name="correo" id="email" placeholder="Correo" data-rule="email" data-msg="Please enter a valid email" />
                                     <div class="validation"></div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control br-radius-zero" name="subject" id="subject" placeholder="Asunto" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                                    <input required type="text" class="form-control br-radius-zero" name="asunto" id="subject" placeholder="Asunto" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
                                     <div class="validation"></div>
                                 </div>
                                 <div class="form-group">
-                                    <textarea class="form-control br-radius-zero" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Mensaje"></textarea>
+                                    <textarea required class="form-control br-radius-zero" name="mensaje" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Mensaje"></textarea>
                                     <div class="validation"></div>
                                 </div>
 

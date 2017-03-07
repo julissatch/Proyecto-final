@@ -230,8 +230,8 @@
                         ResultSet resultado=consulta.executeQuery();
                         
                         while(resultado.next()){
-                            if (resultado.getString(3).charAt(0)=='M' || resultado.getString(3).charAt(0)=='m') {
-                                    out.println("<tr> <td>Mañana</td> <td>"+resultado.getInt(1)+"</td> <td>"+resultado.getString(2)+"</td> <td>"+resultado.getString(3)+"</td> </tr>");
+                            if (resultado.getString(4).charAt(0)=='M' || resultado.getString(4).charAt(0)=='m') {
+                                    out.println("<tr> <td>Mañana</td> <td>"+resultado.getInt(1)+"</td> <td>"+resultado.getString(2)+"</td> <td>"+resultado.getString(5)+"</td> </tr>");
                                 }
                         }
                         conexion.cerrar();
@@ -267,8 +267,8 @@
                         ResultSet resultado=consulta.executeQuery();
                         
                         while(resultado.next()){
-                            if (resultado.getString(3).charAt(0)=='T' || resultado.getString(3).charAt(0)=='t') {
-                                    out.println("<tr> <td>Tarde</td> <td>"+resultado.getInt(1)+"</td> <td>"+resultado.getString(2)+"</td> <td>"+resultado.getString(3)+"</td> </tr>");
+                            if (resultado.getString(4).charAt(0)=='T' || resultado.getString(4).charAt(0)=='t') {
+                                    out.println("<tr> <td>Tarde</td> <td>"+resultado.getInt(1)+"</td> <td>"+resultado.getString(2)+"</td> <td>"+resultado.getString(5)+"</td> </tr>");
                                 }
                         }
                         conexion.cerrar();
