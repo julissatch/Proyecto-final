@@ -4,6 +4,8 @@
     Author     : KEVIN
 --%>
 
+<%@page import="java.sql.*"%>
+<%@page import="model.conexion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +28,16 @@
     ======================================================= -->
   </head>
   <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
-  	<!--banner-->
+      
+      <%
+        if(request.getSession().getAttribute("autorizacion")==null){
+           //request.getRequestDispatcher("index.jsp").forward(request, response);
+           String redirectURL="login.jsp";
+            response.sendRedirect(redirectURL);
+       }
+        %>
+
+      <!--banner-->
 	<section id="banner" class="banner">
 		<div class="bg-color">
 			<nav class="navbar navbar-default navbar-fixed-top">
@@ -42,9 +53,32 @@
 				    </div>
 				    <div class="collapse navbar-collapse navbar-right" id="myNavbar">
 				      <ul class="nav navbar-nav">
-				        <li class="active"><a href="#banner">Citas</a></li>
-				        <li class=""><a href="#services">Pacientes</a></li>
-				        <li class=""><a href="#contact">Actualizar Datos</a></li>
+				        <li class="active">
+                                            <form action="especialidades.jsp" method="post">
+                                                <input type="submit" value="Especialidades" style="font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-color: transparent;background-color: rgba(12, 184, 182, 0.21);">
+                                            </form>
+                                        </li>
+                                        <li class="">
+                                            <form action="pacientes.jsp" method="post">
+                                                <input type="submit" value="Pacientes" style="font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-radius: 5px;border-color: transparent;">
+                                            </form>
+                                        </li>
+                                        <li class="">
+                                            <form action="mensajes.jsp" method="post">
+                                                <input type="submit" value="Mensajes" style="font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-radius: 5px;border-color: transparent;">
+                                            </form>
+                                        </li>
+                                        <li class="">
+                                            <form action="historialdecitas.jsp" method="post">
+                                                <input type="submit" value="Historial de Citas" style="font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-radius: 5px;border-color: transparent;">
+                                            </form>
+                                        </li>
+                                        <li class="">
+                                            <form action="cerrarsesion" method="post">
+                                                <input type="submit" value="Cerrar Sesión" style="font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-radius: 5px;border-color: transparent;">
+                                            </form>
+                                        </li>
+				        
 				        <!--<li class=""><a href="#testimonial">Registro</a></li>-->
 
 				      </ul>
@@ -53,216 +87,39 @@
 			  </div>
 			</nav>
 
-      <section id="doctor-team" class="section-padding">
+                    <section id="doctor-team" class="section-padding" style="padding-top: 100px;">
     		<div class="container">
     			<div class="row">
     				<div class="col-md-12">
-    					<h2 class="ser-title">Escoja la Especialidad!</h2>
+                                    <h3 class="ser-title" style="color: #ffffff;">Escoja una Especialidad para ver la citas de la semana</h3>
     					<hr class="botm-line">
     				</div>
                             
                             
-    				<div class="col-md-2 col-sm-3 col-xs-6">
-                                    <form class="form" role="form" method="post" action="redireccionar">
-    			      <div class="thumbnail">
-                    <a href="#" class="thumb">
-    			      	<img src="img/1.png" alt="..." class="team-img">
-                    </a>
-                                  <input type="submit" name="especialidad" value="Cardiologia">
-    			      </div>
-                      </form>
-    			    </div>
-
-              <div class="col-md-2 col-sm-3 col-xs-6">
-                  <form class="form" role="form" method="post" action="redireccionar">
-      			      <div class="thumbnail">
-                      <a href="#" class="thumb">
-      			      	<img src="img/2.png" alt="..." class="team-img">
-                      </a>
-                                  <input type="submit" name="especialidad" value="Dermatologia">
-      			      </div>
-                  </form>
-      			    </div>
-
-                <div class="col-md-2 col-sm-3 col-xs-6">
-        			      <div class="thumbnail">
-                        <a href="#" class="thumb">
-        			      	<img src="img/3.jpg" alt="..." class="team-img">
-                        </a>
-
-        			          <h4>Endocrinología</h4>
-        			      </div>
-        			    </div>
-
-                  <div class="col-md-2 col-sm-3 col-xs-6">
-          			      <div class="thumbnail">
-                          <a href="index.html" class="thumb">
-          			      	<img src="img/doctor1.jpg" alt="..." class="team-img">
-                          </a>
-
-          			          <h4>Geriatría</h4>
-          			      </div>
-          			    </div>
-
-                    <div class="col-md-2 col-sm-3 col-xs-6">
-            			      <div class="thumbnail">
-                            <a href="#" class="thumb">
-            			      	<img src="img/doctor1.jpg" alt="..." class="team-img">
-                            </a>
-
-            			          <h4>Ginecología</h4>
-            			      </div>
-            			    </div>
-
-                      <div class="col-md-2 col-sm-3 col-xs-6">
-              			      <div class="thumbnail">
-                              <a href="#" class="thumb">
-              			      	<img src="img/doctor1.jpg" alt="..." class="team-img">
-                              </a>
-
-              			          <h4>Hermatología</h4>
-              			      </div>
-              			    </div>
-
-                        <div class="col-md-2 col-sm-3 col-xs-6">
-                			      <div class="thumbnail">
-                                <a href="#" class="thumb">
-                			      	<img src="img/doctor1.jpg" alt="..." class="team-img">
-                                </a>
-
-                			          <h4>Med. General</h4>
-                			      </div>
-                			    </div>
-
-                          <div class="col-md-2 col-sm-3 col-xs-6">
-                  			      <div class="thumbnail">
-                                  <a href="#" class="thumb">
-                  			      	<img src="img/doctor1.jpg" alt="..." class="team-img">
-                                  </a>
-
-                  			          <h4>Med. Interna</h4>
-                  			      </div>
-                  			    </div>
-
-                            <div class="col-md-2 col-sm-3 col-xs-6">
-                    			      <div class="thumbnail">
-                                    <a href="#" class="thumb">
-                    			      	<img src="img/doctor1.jpg" alt="..." class="team-img">
-                                    </a>
-
-                    			          <h4>Med. Integral</h4>
-                    			      </div>
-                    			    </div>
-
-                              <div class="col-md-2 col-sm-3 col-xs-6">
-                      			      <div class="thumbnail">
-                                      <a href="#" class="thumb">
-                      			      	<img src="img/doctor1.jpg" alt="..." class="team-img">
-                                      </a>
-
-                      			          <h4>Neumología</h4>
-                      			      </div>
-                      			    </div>
-
-                                <div class="col-md-2 col-sm-3 col-xs-6">
-                        			      <div class="thumbnail">
-                                        <a href="#" class="thumb">
-                        			      	<img src="img/doctor1.jpg" alt="..." class="team-img">
-                                        </a>
-
-                        			          <h4>Cirugía</h4>
-                        			      </div>
-                        			    </div>
-
-                                  <div class="col-md-2 col-sm-3 col-xs-6">
-                          			      <div class="thumbnail">
-                                          <a href="#" class="thumb">
-                          			      	<img src="img/doctor1.jpg" alt="..." class="team-img">
-                                          </a>
-
-                          			          <h4>Nutrición</h4>
-                          			      </div>
-                          			    </div>
-
-                                    <div class="col-md-2 col-sm-3 col-xs-6">
-                            			      <div class="thumbnail">
-                                            <a href="#" class="thumb">
-                            			      	<img src="img/doctor1.jpg" alt="..." class="team-img">
-                                            </a>
-
-                            			          <h4>Odontología</h4>
-                            			      </div>
-                            			    </div>
-
-                                      <div class="col-md-2 col-sm-3 col-xs-6">
-                              			      <div class="thumbnail">
-                                              <a href="#" class="thumb">
-                              			      	<img src="img/doctor1.jpg" alt="..." class="team-img">
-                                              </a>
-
-                            			          <h4>Oftalmología</h4>
-                              			      </div>
-                              			    </div>
-
-                                        <div class="col-md-2 col-sm-3 col-xs-6">
-                                			      <div class="thumbnail">
-                                                <a href="#" class="thumb">
-                                			      	<img src="img/doctor1.jpg" alt="..." class="team-img">
-                                                </a>
-
-                                			          <h4>Pediatría</h4>
-                                			      </div>
-                                			    </div>
-
-                                          <div class="col-md-2 col-sm-3 col-xs-6">
-                                  			      <div class="thumbnail">
-                                                  <a href="#" class="thumb">
-                                  			      	<img src="img/doctor1.jpg" alt="..." class="team-img">
-                                                  </a>
-
-                                  			          <h4>Podología</h4>
-                                  			      </div>
-                                  			    </div>
-
-                                            <div class="col-md-2 col-sm-3 col-xs-6">
-                                    			      <div class="thumbnail">
-                                                    <a href="#" class="thumb">
-                                    			      	<img src="img/doctor1.jpg" alt="..." class="team-img">
-                                                    </a>
-
-                                    			          <h4>Psicología</h4>
-                                    			      </div>
-                                    			    </div>
-
-                                              <div class="col-md-2 col-sm-3 col-xs-6">
-                                      			      <div class="thumbnail">
-                                                      <a href="#" class="thumb">
-                                      			      	<img src="img/doctor1.jpg" alt="..." class="team-img">
-                                                      </a>
-
-                                      			          <h4>Psiquiatría</h4>
-                                      			      </div>
-                                      			    </div>
-
-                                                <div class="col-md-2 col-sm-3 col-xs-6">
-                                        			      <div class="thumbnail">
-                                                        <a href="#" class="thumb">
-                                        			      	<img src="img/doctor1.jpg" alt="..." class="team-img">
-                                                        </a>
-
-                                        			          <h4>Traumatología</h4>
-                                        			      </div>
-                                        			    </div>
-
-                                                  <div class="col-md-2 col-sm-3 col-xs-6">
-                                          			      <div class="thumbnail">
-                                                          <a href="#" class="thumb">
-                                          			      	<img src="img/doctor1.jpg" alt="..." class="team-img">
-                                                          </a>
-
-                                          			          <h4>Tomografía</h4>
-                                          			      </div>
-                                          			    </div>
+                            
+                            <%
+                          try{  
+                        Connection conex=conexion.obtener();
+                        PreparedStatement consulta=conex.prepareStatement("call especialidad_select();");
+                        
+                        ResultSet resultado=consulta.executeQuery();
+                        int n=1;
+                        while(resultado.next()){
+                            out.println("<div class=\"col-md-4 col-sm-3 col-xs-6\">");
+                            out.println("<form class=\"form\" role=\"form\" method=\"post\" action=\"redireccionar\">");
+                            out.println("<div class=\"thumbnail\">");
+                            out.println("<a href=\"#\" class=\"thumb\">");
+                            out.println("<img src=\"img/"+n+".png\" class=\"team-img\">");
+                            out.println("</a>");
+                            out.println("<input type=\"submit\" name=\"especialidad\" value=\""+resultado.getString(2)+"\">");
+                            out.println("</div>");
+                            out.println("</form>");
+                            out.println("</div>");
+                            n++;
+                        }
+                        conexion.cerrar();
+                        }catch(Exception ex){out.println(ex.toString());}
+                        %>
 
     			</div>
     		</div>

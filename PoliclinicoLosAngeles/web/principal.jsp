@@ -5,6 +5,19 @@
 --%>
 
 <%@page import="javax.swing.JOptionPane"%>
+
+      <% 
+        
+        if(request.getSession().getAttribute("codigo")==null || request.getSession().getAttribute("autorizacion")==null || request.getSession().getAttribute("nombre")==null){
+           //request.getRequestDispatcher("index.jsp").forward(request, response);
+           String redirectURL="login.jsp";
+            response.sendRedirect(redirectURL);
+       }
+          
+        String code = (String)session.getAttribute("codigo");
+        String nombre = (String)session.getAttribute("nombre");
+          
+        %>
 <%@page import="java.util.Calendar"%>
 <%@page import="model.conexion"%>
 <%@page import="java.sql.*"%>
@@ -33,23 +46,9 @@
         Author URL: https://bootstrapmade.com
     ======================================================= -->
     
-    <script type="text/javascript">
-        
-        $('#demoSelect').change(function(){
-    $('#demoInput').val($(this).val());
-});
-        
-    </script>
-    
   </head>
   <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
-      
-      <% 
-        //String codigo = (String)session.getAttribute("codigo");
-        int codigo = (int)session.getAttribute("codigo");
-        String nombre = (String)session.getAttribute("nombre");
-        JOptionPane.showMessageDialog(null, "Codigo del paciente: "+codigo);
-        %> 
+       
       
   	<!--banner-->
 	<section id="banner" class="banner">
@@ -68,50 +67,25 @@
 				    <div class="collapse navbar-collapse navbar-right" id="myNavbar">
 				      <ul class="nav navbar-nav">
 				        <li class="">
-                                        
                                             <form action="cita.jsp" method="post">
                                                 <input type="submit" value="Reservar Cita" style="font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-radius: 5px;border-color: transparent;">
                                             </form>
-                                        
                                         </li>
-				                
-        <!--.focus{background-color: yellow;}
-        
-        color: #fff;
-	text-transform: uppercase;
-	font-size: 14px;
-	font-weight: 300;
-        color: #fff;
-    text-transform: uppercase;
-    background-color: rgba(12, 184, 182, 0.21);
-    
-        -->                                         
-                        <%
-                                            //out.println("<li class=\"active\">"
-                                                    
-                                              //      + "<a href=\"#\">Paciente:  "+nombre+"</a>"
-                                                    
-                                                //    + "</li>");
-                        %>                               
-                                            
-                             
-                                        
                                         
                 
                         <%
-                            
-                                            
                                             out.println("<li class=\"active\">"
                                                     + "<form action=\"principal.jsp\" method=\"post\">"
                                                     + "<input type=\"submit\" value=\""+nombre+"\" style=\"font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-color: transparent;background-color: rgba(12, 184, 182, 0.21);\">"
                                                     + "</form>"
                                                     + "</li>");
-                        
-                        
-                        
                         %>
-                        
-
+                                    
+                                    <li class="active">
+                                            <form action="cerrarsesion" method="post">
+                                                <input type="submit" value="Cerrar Sesión" style="font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-radius: 5px;border-color: transparent;">
+                                            </form>
+                                        </li>
 
 				      </ul>
 				    </div>
@@ -119,22 +93,10 @@
 			  </div>
 			</nav>
                         
-                        
-                        
-                        
-                        
-                        
-                        
-                        
 			<div class="container">
-
-                            
-                            
-                    
-                            
             
             <div class="citas col-sm-4 ">
-            <h1 class="boxes">Citas</h1>
+            <h1 class="boxes">Citas Reservadas</h1>
             <%                        
                 int codigocita=0;
                 try{  
@@ -142,11 +104,11 @@
                         PreparedStatement consulta=conex.prepareStatement("call cita_select();");
                         
                         ResultSet resultado=consulta.executeQuery();
-                        
+                        int codigo=Integer.parseInt(code);
                         while(resultado.next()){
                             if (resultado.getInt(3)==codigo) {
                 out.print("<form action=\"eliminarcita\" method=\"post\">");  
-                out.println("<textarea class=\"bookes\" name=\"message\" rows=\"12\" cols=\"85\" disabled=\"\">");
+                out.println("<textarea class=\"bookes\" name=\"message\" rows=\"13\" cols=\"85\" disabled=\"\">");
                 out.println("                  LUGAR DE CONSULTA :  POLICLÍNICO NUESTRA SEÑORA DE LOS ANGELES");
                 out.print("                  CODIGO DE CITA :  ");  out.println(resultado.getInt(1));codigocita=resultado.getInt(1);
                 out.print("                  PACIENTE :  ");  out.println(nombre.toUpperCase());
@@ -167,6 +129,15 @@
                 out.print("<input type=\"hidden\" name=\"codigocita\" value=\""+codigocita+"\">");
                 out.print("</div>");
                 out.print("</form>");//JOptionPane.showMessageDialog(null, "Codigo de la cita: "+resultado.getInt(1));
+                            out.println("<form name=\"reporte\" action=\"/PoliclinicoLosAngeles/pdfcita\" class=\"pull-right\">");
+                            out.println("<input type=\"hidden\" name=\"codigocita\" value=\""+codigocita+"\">");
+                            out.println("<input type=\"hidden\" name=\"nombre\" value=\""+nombre.toUpperCase()+"\">");
+                            out.println("<input type=\"hidden\" name=\"especialidad\" value=\""+resultado.getString(2).toUpperCase()+"\">");
+                            out.println("<input type=\"hidden\" name=\"fecha\" value=\""+resultado.getString(6)+"\">");
+                            out.println("<input type=\"hidden\" name=\"hora\" value=\""+resultado.getString(4)+"\">");
+                            out.println("<input type=\"hidden\" name=\"doctor\" value=\""+resultado.getString(5).toUpperCase()+"\">");
+                            out.println("<button type=\"submit\" class=\"btn btn-danger\">PDF de Cita</button>");
+                            out.println("</form>");
                             }            
                         }
                         conexion.cerrar();
@@ -174,15 +145,6 @@
                 
                 
             %>
-            <!--
-            <form action="login.jsp" method="post">
-                <div class="form-group col-md-2">
-		<button type="submit" class="btn btn-primary btn-block">Login</button>
-                </div>
-            </form>-->
-            
-      
-
     </div>
 
 	</section>

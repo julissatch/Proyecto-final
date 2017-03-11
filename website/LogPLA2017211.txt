@@ -1,0 +1,9 @@
+Error: model.conexion -->> Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+2017211 3:28.359 ==> : Error: model.conexion -->> Communications link failure
+
+Last packet sent to the server was 0 ms ago.
+2017211 3:28.568 ==> : Error: model.conexion -->> Communications link failure
+
+Last packet sent to the server was 0 ms ago.

@@ -45,10 +45,16 @@
 				    </div>
 				    <div class="collapse navbar-collapse navbar-right" id="myNavbar">
 				      <ul class="nav navbar-nav">
-				        <li class="active"><a href="#banner">Citas</a></li>
-				        <!--<li class=""><a href="#testimonial">Registro</a></li>-->
-
-
+                                        <li class="">
+                                            <form action="citasdoctor.jsp" method="post">
+                                                <input type="submit" value="Citas" style="font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-color: transparent;background-color: rgba(12, 184, 182, 0.21);">
+                                            </form>
+                                        </li>
+                                        <li class="">
+                                            <form action="cerrarsesion" method="post">
+                                                <input type="submit" value="Cerrar Sesión" style="font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-radius: 5px;border-color: transparent;">
+                                            </form>
+                                        </li>
 				      </ul>
 				    </div>
 				</div>
@@ -57,9 +63,17 @@
                     
                     
                     <% 
+                    if(request.getSession().getAttribute("autorizacion")==null){
+                        //request.getRequestDispatcher("index.jsp").forward(request, response);
+                        String redirectURL="login.jsp";
+                         response.sendRedirect(redirectURL);
+                    }    
+                        
                     String especialidaddoctor = (String)session.getAttribute("especialidaddoctor");
                     String nombredoctor = (String)session.getAttribute("nombredoctor");
                     %>
+                    
+                    
                     
                     <div class="container" style="padding-top: 100px;">
     <%
@@ -74,7 +88,7 @@
                             
                             while(resultado3.next()){
                                 
-                                if(resultado3.getInt(1)>=dia){
+                                //if(resultado3.getInt(1)>=dia){
                                 
                                     out.println("<div class=\"container\">");
                                     out.println("<div class=\"tablamedico col-md-10\">");
@@ -85,14 +99,14 @@
                                     out.println("<tbody>");
                                     
                                     out.println("<h3>"+resultado3.getString(2)+"</h3>");
-                                    
-                            PreparedStatement consulta=conex.prepareStatement("call cita_select();");
-                            ResultSet resultado=consulta.executeQuery();        
                                 
                             PreparedStatement consulta2=conex.prepareStatement("call pacientegeneral_select();");
                             ResultSet resultado2=consulta2.executeQuery();
                         
                             while(resultado2.next()){
+                                
+                            PreparedStatement consulta=conex.prepareStatement("call cita_select();");
+                            ResultSet resultado=consulta.executeQuery();     
                                 
                             while(resultado.next()){
                                 
@@ -100,8 +114,12 @@
          
                             out.println("<tr> <td>"+resultado.getInt(1)+"</td> <td>"+resultado.getInt(3)+"</td> <td>"+resultado2.getString(2)+
                                     "</td> <td>"+resultado2.getString(3)+"</td>  <td>"+resultado2.getString(4)+"</td>  <td>"+resultado.getString(2)+
-                                    "</td>  <td>"+resultado.getString(4)+"</td>  <td>"+resultado.getString(5)+"</td> <form class=\"form\" role=\"form\" method=\"post\" action=\"validarcita\"><td><button type=\"submit\" class=\"btn btn-success\">Eliminar Cita</button></td></form></tr>");
-                            
+                                    "</td>  <td>"+resultado.getString(4)+"</td>  <td>"+resultado.getString(5)+"</td> <form class=\"form\" role=\"form\" method=\"post\" action=\"pacienteasistido\"><td>"
+                                    + "<input type=\"hidden\" name=\"codigocita\" value=\""+resultado.getInt(1)+"\">"
+                                    + "<input type=\"hidden\" name=\"codigopaciente\" value=\""+resultado.getInt(3)+"\">"
+                                    + "<input type=\"hidden\" name=\"especialidad\" value=\""+resultado.getString(2)+"\">"
+                                    + "<input type=\"hidden\" name=\"fecha\" value=\""+resultado.getString(6)+"\">"
+                                    + "<button type=\"submit\" class=\"btn btn-success\">Atendido</button></td></form></tr>");
                                     }
                                 
                             }    
@@ -112,7 +130,7 @@
                                     out.println("</div>");
                                     
                                     
-                                }
+                                //}
                                     
                             }
                         conexion.cerrar();

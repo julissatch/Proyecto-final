@@ -34,21 +34,42 @@
         Author URL: https://bootstrapmade.com
     ======================================================= -->
     
-    <script type="text/javascript">
         
-        $('#demoSelect').change(function(){
-    $('#demoInput').val($(this).val());
-});
+        <%
+        //mensaje en caso de usuario incorrecto
+        if(request.getSession().getAttribute("reservar")!=null){
+            
+            String reservar = (String)session.getAttribute("reservar");
+            if(reservar.equalsIgnoreCase("ocupado")){
+            out.println("<script type=\"text/javascript\">alert(\"Ya hay otra cita en esta misma hora!\");</script>");
+            }
+            if(reservar.equalsIgnoreCase("mismodia")){
+            out.println("<script type=\"text/javascript\">alert(\"Ya tienes una cita en esa especialidad en ese mismo día!\");</script>");
+            }
+            if(reservar.equalsIgnoreCase("mismahora")){
+            out.println("<script type=\"text/javascript\">alert(\"Ya tienes una cita a esa misma hora en otra especialidad!\");</script>");
+            }
+            request.getSession().setAttribute("reservar",null); 
+            
+       }
+
+        %>
         
-    </script>
     
   </head>
   <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
       
-      <% 
-        //String codigo = (String)session.getAttribute("codigo");
-        int codigo = (int)session.getAttribute("codigo");
+        <% 
+
+        if(request.getSession().getAttribute("autorizacion")==null){
+           //request.getRequestDispatcher("index.jsp").forward(request, response);
+           String redirectURL="login.jsp";
+            response.sendRedirect(redirectURL);
+       }
+          
+        String code = (String)session.getAttribute("codigo");
         String nombre = (String)session.getAttribute("nombre");
+          
         %> 
       
   	<!--banner-->
@@ -67,46 +88,33 @@
 				    </div>
 				    <div class="collapse navbar-collapse navbar-right" id="myNavbar">
 				      <ul class="nav navbar-nav">
-				        <li class="active"><a href="#banner">Reservar Cita</a></li>
-				        <!--<li class=""><a href="#testimonial">Registro</a></li>-->
-
-                             
-                                        
-                                        
+				        <li class="active">
+                                            <form action="cita.jsp" method="post">
+                                                <input type="submit" value="Reservar Cita" style="font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-color: transparent;background-color: rgba(12, 184, 182, 0.21);">
+                                            </form>
+                                        </li>
                 
                         <%
-                            
-                                            
-                                            out.println("<li><a href=\"#\">Paciente:  "+nombre+"</a></li>");
-                        
-                        
-                        
+                                            out.println("<li class=\"\">"
+                                                    + "<form action=\"principal.jsp\" method=\"post\">"
+                                                    + "<input type=\"submit\" value=\""+nombre+"\" style=\"font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-radius: 5px;border-color: transparent;\">"
+                                                    + "</form>"
+                                                    + "</li>");
                         %>
-                        
-
-
+                                    
+                                    <li class="active">
+                                            <form action="cerrarsesion" method="post">
+                                                <input type="submit" value="Cerrar Sesión" style="font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-radius: 5px;border-color: transparent;">
+                                            </form>
+                                        </li>
+                                    
 				      </ul>
 				    </div>
 				</div>
 			  </div>
 			</nav>
                         
-                        
-                        
-                        
-                    <%//JOptionPane.showMessageDialog(null, "");%>    
-                        
-                        
-                        
-                        
-                        
 			<div class="container">
-
-                            
-                            
-                            
-                            
-                            
                             
             <div class="book form-group row col-md-2">
                 
@@ -148,15 +156,15 @@
                         
                         Calendar now = Calendar.getInstance();
                         int dia=now.get(Calendar.DAY_OF_WEEK)-1;
-                            //JOptionPane.showMessageDialog(null, "Día: "+dia);
+                            
                         while(resultado.next()){
                             
-                            //if (dia==7) {
+                            //if (dia==0) {
                                     out.println("<option value=\""+resultado.getString(2)+"\">"+resultado.getString(2)+"</option>");
                               //  }
                             //else{
                             //if (resultado.getInt(1)>dia) {
-                                    //out.println("<option value=\"  "+resultado.getString(2)+"\">"+resultado.getString(2)+"</option>");
+                                //    out.println("<option value=\"  "+resultado.getString(2)+"\">"+resultado.getString(2)+"</option>");
                                 //}
                             //}
                         }
@@ -191,17 +199,17 @@
                  <%
                      Calendar now = Calendar.getInstance();
  
-                     String fecha=""+now.get(Calendar.DAY_OF_MONTH)+ " - "+ (now.get(Calendar.MONTH) +1)+ " - "+ now.get(Calendar.YEAR);
-                     int day=now.get(Calendar.DAY_OF_MONTH);
-                     int mes=(now.get(Calendar.MONTH) +1);
-                     int anio=now.get(Calendar.YEAR);
+                     //String fecha=""+now.get(Calendar.DAY_OF_MONTH)+ " - "+ (now.get(Calendar.MONTH) +1)+ " - "+ now.get(Calendar.YEAR);
+                     //int day=now.get(Calendar.DAY_OF_MONTH);
+                     //int mes=(now.get(Calendar.MONTH) +1);
+                     //int anio=now.get(Calendar.YEAR);
                  %>
                  
             <div class="col-10 form-group">
-                <input type="hidden" name="codigo" value=<%out.println(codigo);%>>
-                <input type="hidden" name="day" value=<%out.println(day);%>>
-                <input type="hidden" name="mes" value=<%out.println(mes);%>>
-                <input type="hidden" name="anio" value=<%out.println(anio);%>>
+                <input type="hidden" name="codigo" value=<%out.println(code);%>>
+                <!--<input type="hidden" name="day" value=<%//out.println(day);%>>-->
+                <!--<input type="hidden" name="mes" value=<%//out.println(mes);%>>-->
+                <!--<input type="hidden" name="anio" value=<%//out.println(anio);%>>-->
 		<button type="submit" class="btn btn-success btn-block">Reservar Cita</button>
             </div>                     
                  

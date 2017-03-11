@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Acceso>
+    <WebAccess nombre="web"> 
+	<parametros>
+            <server>jdbc:mysql://localhost/</server>
+            <port>3306</port>
+            <database>policlinico</database>
+            <username>root</username>
+            <password></password>
+            <driver>com.mysql.jdbc.Driver</driver>
+        </parametros>	
+    </WebAccess>
+</Acceso>
+
+

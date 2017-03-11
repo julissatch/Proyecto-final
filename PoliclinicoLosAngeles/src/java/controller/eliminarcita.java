@@ -35,29 +35,12 @@ public class eliminarcita extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             //String codigocita=request.getParameter("codigocita");
             int codigocita=Integer.parseInt(request.getParameter("codigocita"));
-            //int numb=Integer.parseInt(codigocita);
-//            request.getSession().setAttribute("codigo", codigo);
-//            request.getSession().setAttribute("codigo", codigocita);
-//            JOptionPane.showMessageDialog(null, "Codigo de la cita: "+codigocita);
-                usuario objUsuario=new usuario();
+            
+            usuario objUsuario=new usuario();
             objUsuario.DeleteCita(codigocita);
             String redirectURL="principal.jsp";
             response.sendRedirect(redirectURL);            
-//    
-//        if (objUsuario.DeleteCita(codigocita)) {
-//            //request.getRequestDispatcher("principal.jsp").forward(request, response);//Normal
-//            //response.sendRedirect("/principal.jsp");
-//            String nombre=objUsuario.GetNombrePaciente(codigo, dni);
-//            request.getSession().setAttribute("nombre", nombre);
-//            String redirectURL="cita.jsp";
-//        response.sendRedirect(redirectURL);
-//            
-//        }
-//    else{
-//        //out.println("Está mal! Dumb!");
-//        String redirectURL="login.jsp";JOptionPane.showMessageDialog(null, "54");
-//        response.sendRedirect(redirectURL);
-//    }
+
         }
     }
 

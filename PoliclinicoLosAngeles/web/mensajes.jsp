@@ -44,11 +44,12 @@
   </head>
   <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
       
-      <% 
-        //String codigo = (String)session.getAttribute("codigo");
-        //int codigo = (int)session.getAttribute("codigo");
-        //String nombre = (String)session.getAttribute("nombre");
-        //JOptionPane.showMessageDialog(null, "Codigo del paciente: "+codigo);
+        <%
+        if(request.getSession().getAttribute("autorizacion")==null){
+           //request.getRequestDispatcher("index.jsp").forward(request, response);
+           String redirectURL="login.jsp";
+            response.sendRedirect(redirectURL);
+       }
         %> 
       
   	<!--banner-->
@@ -67,52 +68,33 @@
 				    </div>
 				    <div class="collapse navbar-collapse navbar-right" id="myNavbar">
 				      <ul class="nav navbar-nav">
+                                          
 				        <li class="">
-                                        
-                                            <form action="cita.jsp" method="post">
-                                                <input type="submit" value="Reservar Cita" style="font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-radius: 5px;border-color: transparent;">
+                                            <form action="especialidades.jsp" method="post">
+                                                <input type="submit" value="Especialidades" style="font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-radius: 5px;border-color: transparent;">
                                             </form>
-                                        
+                                        </li>
+				        <li class="active">
+                                            <form action="pacientes.jsp" method="post">
+                                                <input type="submit" value="Pacientes" style="font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-radius: 5px;border-color: transparent;">
+                                            </form>
+                                        </li>
+                                        <li class="">
+                                            <form action="mensajes.jsp" method="post">
+                                                <input type="submit" value="Mensajes" style="font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-color: transparent;background-color: rgba(12, 184, 182, 0.21);">
+                                            </form>
+                                        </li>
+                                        <li class="">
+                                            <form action="historialdecitas.jsp" method="post">
+                                                <input type="submit" value="Historial de Citas" style="font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-radius: 5px;border-color: transparent;">
+                                            </form>
+                                        </li>
+                                        <li class="">
+                                            <form action="cerrarsesion" method="post">
+                                                <input type="submit" value="Cerrar Sesión" style="font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-radius: 5px;border-color: transparent;">
+                                            </form>
                                         </li>
 				                
-        <!--.focus{background-color: yellow;}
-        
-        color: #fff;
-	text-transform: uppercase;
-	font-size: 14px;
-	font-weight: 300;
-        color: #fff;
-    text-transform: uppercase;
-    background-color: rgba(12, 184, 182, 0.21);
-    
-        -->                                         
-                        <%
-                                            //out.println("<li class=\"active\">"
-                                                    
-                                              //      + "<a href=\"#\">Paciente:  "+nombre+"</a>"
-                                                    
-                                                //    + "</li>");
-                        %>                               
-                                            
-                             
-                                        
-                                        
-                
-                        <%
-                            
-                                            
-                                         //   out.println("<li class=\"active\">"
-                                           //         + "<form action=\"principal.jsp\" method=\"post\">"
-                                             //       + "<input type=\"submit\" value=\""+nombre+"\" style=\"font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-color: transparent;background-color: rgba(12, 184, 182, 0.21);\">"
-                                              //      + "</form>"
-                                                //    + "</li>");
-                        
-                        
-                        
-                        %>
-                        
-
-
 				      </ul>
 				    </div>
 				</div>

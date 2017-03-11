@@ -1,0 +1,14 @@
+Error: model.persona -->> dato1
+2017125 11:3.187 ==> : Error: prueba -->> Datos escritos
+2017125 11:9.37 ==> : Error: lectura -->> XML
+2017125 11:11.910 ==> : Error: Parametro -->> jdbc:mysql://localhost/
+2017125 11:11.928 ==> : Error: Parametro -->> 3306
+2017125 11:11.932 ==> : Error: Parametro -->> SistemaWeb
+2017125 11:11.932 ==> : Error: Parametro -->> root
+2017125 11:11.932 ==> : Error: Parametro -->> 
+2017125 11:11.932 ==> : Error: Parametro -->> com.mysql.jdbc.Driver
+2017125 11:11.948 ==> : Error: lectura -->> XML
+2017125 1:15.459 ==> : Error: prueba -->> Datos escritos
+2017125 2:36.71 ==> : Error: model.persona -->> dato1
+2017125 2:43.834 ==> : Error: model.persona -->> dato1
+2017125 2:57.873 ==> : Error: model.persona -->> dato1

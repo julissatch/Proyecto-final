@@ -40,7 +40,6 @@ public class consulta extends HttpServlet {
             
 //            String tipo=request.getParameter("tipo");
 
-            JOptionPane.showMessageDialog(null, ""+nombre+" "+correo+" "+asunto+" "+" "+mensaje);
             
 //            request.getSession().setAttribute("codigo", codigo);
 //            request.getSession().setAttribute("codigo", codigo);

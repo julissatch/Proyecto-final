@@ -32,6 +32,22 @@
         <servlet-name>eliminarmensaje</servlet-name>
         <servlet-class>controller.eliminarmensaje</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>pdf</servlet-name>
+        <servlet-class>controller.pdf</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>cerrarsesion</servlet-name>
+        <servlet-class>controller.cerrarsesion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>pacienteasistido</servlet-name>
+        <servlet-class>controller.pacienteasistido</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>pdfcita</servlet-name>
+        <servlet-class>controller.pdfcita</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>validar</servlet-name>
         <url-pattern>/validar</url-pattern>
@@ -63,6 +79,22 @@
     <servlet-mapping>
         <servlet-name>eliminarmensaje</servlet-name>
         <url-pattern>/eliminarmensaje</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>pdf</servlet-name>
+        <url-pattern>/pdf</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cerrarsesion</servlet-name>
+        <url-pattern>/cerrarsesion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>pacienteasistido</servlet-name>
+        <url-pattern>/pacienteasistido</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>pdfcita</servlet-name>
+        <url-pattern>/pdfcita</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

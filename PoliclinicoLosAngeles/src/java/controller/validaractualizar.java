@@ -36,8 +36,6 @@ public class validaractualizar extends HttpServlet {
             String fecha=request.getParameter("fecha");
 //            String tipo=request.getParameter("tipo");
 
-            JOptionPane.showMessageDialog(null, ""+codigo+" "+nombre+" "+paterno+" "+" "+materno+" "+" "+sexo+" "+" "+dni+" "+" "+edad+" "+" "+peso+" "+" "+talla+" "+" "+fecha+" ");
-            
 //            request.getSession().setAttribute("codigo", codigo);
 //            request.getSession().setAttribute("codigo", codigo);
 //            

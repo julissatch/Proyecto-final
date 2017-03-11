@@ -34,10 +34,8 @@ public class redireccionar extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             //String codigocita=request.getParameter("codigocita");
-            String especialidad=request.getParameter("especialidad");            
+            String especialidad=request.getParameter("especialidad");
 
-            JOptionPane.showMessageDialog(null, "Especilidad: "+especialidad);
-            
             request.getSession().setAttribute("especialidad", especialidad);
             
             String redirectURL="citasemana.jsp";

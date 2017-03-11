@@ -29,6 +29,13 @@
     ======================================================= -->
   </head>
   <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+      <%
+        if(request.getSession().getAttribute("autorizacion")==null){
+           //request.getRequestDispatcher("index.jsp").forward(request, response);
+           String redirectURL="login.jsp";
+            response.sendRedirect(redirectURL);
+       }
+        %>
   	<!--banner-->
 	<section id="banner" class="banner">
 		<div class="bg-color">
@@ -45,18 +52,31 @@
 				    </div>
 				    <div class="collapse navbar-collapse navbar-right" id="myNavbar">
 				      <ul class="nav navbar-nav">
-				        <li class="active"><a href="#banner">Cita</a></li>
-				        <li class=""><a href="#services">Nosotros</a></li>
-				        <li class=""><a href="http://www.policlinico.org/especialidades/cardiologia.html">Especialidades</a></li>
-				        <li class=""><a href="#contact">Contácto</a></li>
-				        <!--<li class=""><a href="#testimonial">Registro</a></li>-->
-
-
-                <li class="">
-                            <a href="#">Paciente: Juan Pérez</a></li>
-                </li>
-
-
+				        <li class="">
+                                            <form action="especialidades.jsp" method="post">
+                                                <input type="submit" value="Especialidades" style="font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-radius: 5px;border-color: transparent;">
+                                            </form>
+                                        </li>
+				        <li class="active">
+                                            <form action="pacientes.jsp" method="post">
+                                                <input type="submit" value="Pacientes" style="font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-radius: 5px;border-color: transparent;">
+                                            </form>
+                                        </li>
+                                        <li class="">
+                                            <form action="mensajes.jsp" method="post">
+                                                <input type="submit" value="Mensajes" style="font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-radius: 5px;border-color: transparent;">
+                                            </form>
+                                        </li>
+                                        <li class="">
+                                            <form action="historialdecitas.jsp" method="post">
+                                                <input type="submit" value="Historial de Citas" style="font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-radius: 5px;border-color: transparent;">
+                                            </form>
+                                        </li>
+                                        <li class="">
+                                            <form action="cerrarsesion" method="post">
+                                                <input type="submit" value="Cerrar Sesión" style="font-size: 14px;font-weight: 300;color: #fff; text-transform: uppercase; background-color: transparent;padding-bottom: 13px;padding-top: 13px;margin-top: 0px;border-radius: 5px;border-color: transparent;">
+                                            </form>
+                                        </li>
 				      </ul>
 				    </div>
 				</div>
@@ -85,18 +105,7 @@
                         ResultSet resultado=consulta.executeQuery();
                         
                         while(resultado.next()){%>
-                                    <!--out.println("<tr> <td>"+resultado.getInt(1)+"</td>"+"<td>"+resultado.getString(2)+"</td>"+
-                                            "<td>"+resultado.getString(3)+"</td>"+"<td>"+resultado.getString(4)+"</td>"+
-                                            "<td>"+resultado.getString(5)+"</td>"+"<td>"+resultado.getInt(6)+"</td>"+
-                                            "<td>"+resultado.getInt(7)+"</td>"+"<td>"+resultado.getDouble(8)+"</td>"+
-                                            "<td>"+resultado.getDouble(9)+"</td> <td>"+resultado.getDate(10)   +-->
-                                            
-                        
-            
-            
-            
-            
-            
+                                    
             <%
             
                 if (resultado.getInt(1)==codigopaciente) {
@@ -139,27 +148,27 @@
             </div>
 
             <div class="col-md-3" style="margin: 10px;">
-            <label for="example-email-input" class="col-2 col-form-label" style="color: #ffffff;">DNI</label>
-              <input class="form-control" name="dni" type="text" value="<%out.println(resultado.getInt(6));%>" maxlength="7" required>
+            <label for="" class="col-2 col-form-label" style="color: #ffffff;">DNI</label>
+              <input class="form-control" name="dni" type="text" value="<%out.println(resultado.getInt(6));%>" maxlength="8" required>
             </div>
 
             <div class="col-md-3" style="margin: 10px;">
-            <label for="example-email-input" class="col-2 col-form-label" style="color: #ffffff;">Edad</label>
+            <label for="" class="col-2 col-form-label" style="color: #ffffff;">Edad</label>
               <input class="form-control" name="edad" type="text" value="<%out.println(resultado.getInt(7));%>" maxlength="3" required>
             </div>
 
             <div class="col-md-3" style="margin: 10px;">
-            <label for="example-email-input" class="col-2 col-form-label" style="color: #ffffff;">Peso(Kg)</label>
+            <label for="" class="col-2 col-form-label" style="color: #ffffff;">Peso(Kg)</label>
               <input class="form-control" name="peso" type="text" value="<%out.println(resultado.getDouble(8));%>" maxlength="5" title="Peso en Kg" required>
             </div>
 
             <div class="col-md-3" style="margin: 10px;">
-            <label for="example-email-input" class="col-2 col-form-label" style="color: #ffffff;">Talla(mts)</label>
+            <label for="" class="col-2 col-form-label" style="color: #ffffff;">Talla(mts)</label>
               <input class="form-control" name="talla" type="text" value="<%out.println(resultado.getDouble(9));%>" maxlength="4" title="Talla en mts" required>
             </div>
             
             <div class="col-md-3" style="margin: 10px;">
-            <label for="example-date-input" class="col-2 col-form-label" style="color: #ffffff;">Fecha de Nacimiento</label>
+            <label for="" class="col-2 col-form-label" style="color: #ffffff;">Fecha de Nacimiento</label>
             <input class="form-control" name="fecha" type="date" value="<%out.print(resultado.getDate(10));%>"required>
             </div>
 

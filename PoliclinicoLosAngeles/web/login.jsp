@@ -26,8 +26,17 @@
     ======================================================= -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     
+    <%
+        //mensaje en caso de usuario incorrecto
+        if(request.getSession().getAttribute("acceso")!=null){
+            out.println("<script type=\"text/javascript\">alert(\"Codigo o DNI incorrecto!\");</script>");
+       }
+        request.getSession().setAttribute("acceso",null);
+    %>
+    
   </head>
-  <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+  <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">   
+      
   	<!--banner-->
 	<section id="banner" class="banner">
 		<div class="bg-color">
@@ -51,7 +60,7 @@
 				      </ul>
 
               <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
+        <li class="dropdown"><!--Para despplegar el login-->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login<span class="caret"></span></a>
 			<ul id="login-dp" class="dropdown-menu">
 				<li>
@@ -65,7 +74,7 @@
 										</div>
 										<div class="form-group">
 											 <label class="sr-only" >dni</label>
-											 <input type="text" name="dni" class="form-control" id="exampleInputPassword2" placeholder="DNI" required>
+											 <input type="password" name="dni" class="form-control" id="exampleInputPassword2" placeholder="DNI" required>
 										</div>
 										<div class="form-group">
 											 <button type="submit" class="btn btn-primary btn-block">Login</button>
@@ -99,7 +108,7 @@
 						<div class="banner-text text-center">
 							<h1 class="white">Haga su cita ya!!</h1>
 							<p>Prueba nuestro nuevo Servivio de Reserva de Citas Online <br>y ahórrese las colas</p>
-							<a href="#contact" class="btn btn-appoint">Hacer una Cita</a>
+							<a href="#contact" class="btn btn-appoint">Hacer una Consulta</a>
 						</div>
 						<div class="overlay-detail text-center">
 			               <a href="#service"><i class="fa fa-angle-down"></i></a>
@@ -116,22 +125,6 @@
             
         </div>
         
-        <script class="text/javascript">   
-        
-        $('.myCheckbox').click(function() {
-        $(this).siblings('input:checkbox').prop('checked', false);
-    });
-
-
-    //Every checkboxes in the page
-    /*$('.selectme input:checkbox').click(function() {
-        $('.selectme input:checkbox').not(this).prop('checked', false);
-    }); */
-
-        </script>
-
-
-
   <section id="services" class="section-padding">
 
           <div class="container">
@@ -265,20 +258,20 @@
 				<div class="row">
 					<div class="col-md-4 col-sm-4 marb20">
 							<div class="ftr-tle">
-								<h4 class="white no-padding">About Us</h4>
+								<h4 class="white no-padding">Acerca de Nosotros</h4>
 							</div>
 							<div class="info-sec">
-								<p>Praesent convallis tortor et enim laoreet, vel consectetur purus latoque penatibus et dis parturient.</p>
+								<p>Página dedicada a la reserva de citas del Policlínico Parroquial Nuestra Señora De Los Ángeles.</p>
 							</div>
 					</div>
 					<div class="col-md-4 col-sm-4 marb20">
 						<div class="ftr-tle">
-							<h4 class="white no-padding">Quick Links</h4>
+							<h4 class="white no-padding">Accesos Rápidos</h4>
 						</div>
 						<div class="info-sec">
 							<ul class="quick-info">
-								<li><a href="index.html"><i class="fa fa-circle"></i>Inicio</a></li>
-								<li><a href="#service"><i class="fa fa-circle"></i>Especialidades</a></li>
+								<li><a href="#banner"><i class="fa fa-circle"></i>Inicio</a></li>
+								<li><a href="#services"><i class="fa fa-circle"></i>Nosotros</a></li>
 								<li><a href="#contact"><i class="fa fa-circle"></i>Contáctenos</a></li>
 							</ul>
 						</div>
@@ -303,15 +296,10 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 text-center">
-						© Copyright Medilab Theme. All Rights Reserved
+						© Policlínico los Ángeles. Todos los derechos reservados.
                         <div class="credits">
-                            <!--
-                                All the links in the footer should remain intact.
-                                You can delete the links only if you purchased the pro version.
-                                Licensing information: https://bootstrapmade.com/license/
-                                Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Medilab
-                            -->
-                            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                            
+                            <!--Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>-->
                         </div>
 					</div>
 				</div>

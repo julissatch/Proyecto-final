@@ -7,6 +7,8 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,24 +41,37 @@ public class validarcita extends HttpServlet {
             String dia=request.getParameter("dia");
             String hora=request.getParameter("hora");
             int codigopaciente=Integer.parseInt(request.getParameter("codigo"));
-            int day=Integer.parseInt(request.getParameter("day"));
-            int mes=Integer.parseInt(request.getParameter("mes"));
-            int anio=Integer.parseInt(request.getParameter("anio"));
-            String fecha=""+day+" - "+mes+" - "+anio;
+//            int day=Integer.parseInt(request.getParameter("day"));
+//            int mes=Integer.parseInt(request.getParameter("mes"));
+//            int anio=Integer.parseInt(request.getParameter("anio"));
             
-
-//            request.getSession().setAttribute("codigo", codigo);
-//            request.getSession().setAttribute("ddni", dni);
-//            
+            int aux=0;
+            switch(dia){
+                case "Lunes":aux=1;break;
+                case "Martes":aux=2;break;
+                case "Miercoles":aux=3;break;
+                case "Jueves":aux=4;break;
+                case "Viernes":aux=5;break;
+                case "Sabado":aux=6;break;
+            }
+            
+            Calendar now = Calendar.getInstance();
+            int aux2=now.get(Calendar.DAY_OF_WEEK)-1;
+            
+            Calendar c1 = GregorianCalendar.getInstance();
+            c1.add(Calendar.DAY_OF_MONTH, aux+1);
+            
+            String fecha=c1.getTime().toLocaleString().charAt(0)+""+c1.getTime().toLocaleString().charAt(1)+" - "+
+                    c1.getTime().toLocaleString().charAt(3)+""+c1.getTime().toLocaleString().charAt(4)+" - "+
+                    c1.getTime().toLocaleString().charAt(6)+""+c1.getTime().toLocaleString().charAt(7)+c1.getTime().toLocaleString().charAt(8)+""+c1.getTime().toLocaleString().charAt(9);
+            
     usuario objUsuario=new usuario();
-        if (objUsuario.GetCita(especialidad.trim(),dia.trim(),hora.trim())) {
+        if (objUsuario.GetCita(especialidad.trim(),dia.trim(),hora.trim(),codigopaciente).equalsIgnoreCase("")) {
             
         String doctor=objUsuario.SearchDoctor(especialidad.trim(),dia.trim(),hora.trim());
         
-                JOptionPane.showMessageDialog(null, especialidad.trim()+" "+codigopaciente+" "+hora.trim()+" "+doctor.trim()+" "+fecha.trim()+" "+dia.trim());
-        
         objUsuario.SetCita(especialidad.trim(), codigopaciente, hora.trim(), doctor.trim(), fecha.trim(), dia.trim());
-            
+        request.getSession().setAttribute("reservar",null);
 //            request.getRequestDispatcher("principal.jsp").forward(request, response);//Normal
 //            response.sendRedirect("/principal.jsp");
             String redirectURL="principal.jsp";
@@ -70,7 +85,8 @@ public class validarcita extends HttpServlet {
             
         }
     else{
-            
+            String reservar=objUsuario.GetCita(especialidad.trim(),dia.trim(),hora.trim(),codigopaciente);
+        request.getSession().setAttribute("reservar",reservar);
         String redirectURL="cita.jsp";
         response.sendRedirect(redirectURL);
     }
