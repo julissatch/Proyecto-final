@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-03-2017 a las 23:59:04
+-- Tiempo de generación: 11-03-2017 a las 01:09:28
 -- Versión del servidor: 10.1.19-MariaDB
 -- Versión de PHP: 5.6.28
 
@@ -19,6 +19,80 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `policlinico`
 --
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `administrador_login_validar` (IN `_codigo` INT(7))  BEGIN
+	SELECT dniadmin FROM administrador WHERE codadmin=_codigo;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cita_insert` (IN `_refEsp` VARCHAR(20), IN `_refcodpac` INT(10), IN `_hora_atenc` VARCHAR(25), IN `_refDoc` VARCHAR(25), IN `_refFecha` VARCHAR(20), IN `_refDia` VARCHAR(20))  BEGIN
+    INSERT INTO `cita` (`refEsp`, `refcodpac`, `hora_atenc`, `refDoc`, `refFecha`, `refDia`) VALUES (_refEsp, _refcodpac, _hora_atenc, _refDoc, _refFecha, _refDia);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cita_select` ()  BEGIN SELECT *FROM cita; END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `consulta_insert` (IN `_nom` VARCHAR(30), IN `_correo` VARCHAR(30), IN `_Asunto` VARCHAR(50), IN `_Mensaje` TEXT)  BEGIN
+    INSERT INTO `mensajes` (`nom`, `correo`, `Asunto`, `Mensaje`) VALUES (_nom, _correo, _Asunto, _Mensaje);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `dia_select` ()  BEGIN SELECT *FROM dias; END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `doctor_login_validar` (IN `_codigo` INT(7))  BEGIN
+	SELECT dnidoc FROM doctor WHERE codigodoc=_codigo;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `doctor_select` ()  BEGIN
+    SELECT *FROM doctor;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminar_cita` (IN `_codcita` INT(10))  BEGIN
+	DELETE from cita WHERE codcita=_codcita;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminar_todo_cita` ()  BEGIN
+    DELETE from cita;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `especialidad_select` ()  BEGIN SELECT *FROM especialidad; END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `historialcitas_select` ()  BEGIN SELECT *FROM historialcitas; END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `hora_select` ()  BEGIN
+	SELECT *FROM hora;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_cita_historial` (IN `_CodCitapas` INT(10), IN `_refpac` INT(20), IN `_refesp` VARCHAR(25), IN `_refFecha` VARCHAR(20))  BEGIN
+    INSERT INTO historialcitas (`CodCitapas`,`refpac`, `refesp`, `refFecha`) VALUES (_CodCitapas,_refpac, _refesp, _refFecha);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `mensajes_eliminar` (IN `_Codmens` INT(10))  BEGIN
+	DELETE from mensajes WHERE Codmens=_Codmens;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `mensajes_select` ()  BEGIN
+    SELECT *FROM mensajes;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `modificar_cita` (IN `_codcita` VARCHAR(10), IN `_refEsp` VARCHAR(20), IN `_refturno` VARCHAR(15), IN `_refDoc` VARCHAR(25))  BEGIN
+	UPDATE cita set refEsp=_refEsp, refturno=_refturno, refDoc=_refDoc WHERE codcita=_codcita;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `mostrar_citas` ()  BEGIN
+	SELECT *FROM cita;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pacientegeneral_login_validar` (IN `_codigo` INT(10))  BEGIN
+	SELECT dni FROM pacientegeneral WHERE codigo=_codigo;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pacientegeneral_select` ()  BEGIN SELECT *FROM pacientegeneral; END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pacientegeneral_update` (IN `_codigo` INT(10), IN `_nombre` VARCHAR(25), IN `_appaterno` VARCHAR(25), IN `_apmaterno` VARCHAR(25), IN `_sexo` VARCHAR(5), IN `_dni` INT(11), IN `_edad` INT(3), IN `_peso` DECIMAL(3,1), IN `_talla` DECIMAL(3,2), IN `_nacimiento` DATE)  BEGIN UPDATE pacientegeneral set nombre=_nombre, appaterno=_appaterno, apmaterno=_apmaterno, sexo=_sexo, dni=_dni, edad=_edad, peso=_peso, talla=_talla, nacimiento=_nacimiento WHERE codigo=_codigo; END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
